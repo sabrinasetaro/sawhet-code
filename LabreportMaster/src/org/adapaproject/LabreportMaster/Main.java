@@ -72,18 +72,49 @@ public class Main {
 						new CreateAnalysesDocument(doc, plagcheck);
 						
 						//send email
-						new Email();
-						
-						WritetoDatabase dbInsert = new WritetoDatabase();
+						try {
+							new Email();
+							System.out.println("Email was sent.");
+						} catch (Exception e) {
+							System.err.println("Email was not sent, there was some problem.");
+						}
 
-						dbInsert.insertCitations();
-						dbInsert.insertLabreports();
-						
+						try {
+							WritetoDatabase dbInsert = new WritetoDatabase();
+							try {
+								dbInsert.insertCitations();
+							} catch (Exception e) {
+								System.err.println("Citations were not saved in database.");
+								e.printStackTrace();
+							}
+							try {
+								dbInsert.insertLabreports();
+							} catch (Exception e) {
+								System.err.println("Labreport info was not saved in database.");
+								e.printStackTrace();
+							}
+						} catch (Exception e1) {
+							System.err.println("Database could not be instantiated.");
+							e1.printStackTrace();
+						}
+				
 						//add to Mimir
-						gate.addtoMimir(doc, CreateContentDocument.get_id());
+						try {
+							gate.addtoMimir(doc, CreateContentDocument.get_id());
+						} catch (Exception e) {
+							System.err.println("Saving to mimir failed.");
+							e.printStackTrace();
+						}
 											
 					}
-					gate.addtoDatastore();
+					
+					try {
+						gate.addtoDatastore();
+					} catch (Exception e) {
+						System.err.println("New documents in corpus were not added to datastore.");
+						e.printStackTrace();
+					}
+
 					
 					Factory.deleteResource(corpus);
 					
