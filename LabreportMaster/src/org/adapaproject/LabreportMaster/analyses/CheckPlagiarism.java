@@ -32,7 +32,6 @@ import gate.persist.PersistenceException;
 public class CheckPlagiarism {
 	
 	private AnnotationSet _annotCit;
-	//private Corpus _all;
 	private HashMap<String, String> _citationsDBMap;
 	private Database _db;
 	private static ArrayList<String> _sanitizedCitations;
@@ -60,11 +59,8 @@ public class CheckPlagiarism {
 		//calculate how often id occurs in citations
 		for(String id : sameIds) {
 			int totalCit = sameIds.size();
-			//System.out.println("totalCit: " + totalCit);
 			double idsFreq = Collections.frequency(sameIds, id);
-			//System.out.println("idsFreq: " + idsFreq);
 			double fraction = 100 * (idsFreq / totalCit);
-			//System.out.println("fraction: " + fraction);
 			if(idsFreq >= 2 && fraction >= 50) {
 				fishySet.add(id);
 				preambleCheck = true;
@@ -85,25 +81,6 @@ public class CheckPlagiarism {
 		
 	}
 	
-/*	*//**
-	 * This is just for testing, to be deleted later
-	 *//*
-	private ArrayList<String> testList() {
-		ArrayList<String> test = new ArrayList<String>();
-		test.add("R_xz40hVjjuuhxz69");
-		test.add("R_26uvrt41GFcIlNj");
-		test.add("R_xz40hVjjuuhxz69");
-		test.add("R_1Qi6ue4i2UU7I5d");
-		test.add("R_xz40hVjjuuhxz69");
-		test.add("R_xz40hVjjuuhxz69");
-		test.add("R_88GME1VBdJYhOpz");
-		test.add("R_xz40hVjjuuhxz69");
-		test.add("R_AbKMHsD5s8QRPih");
-		test.add("R_xz40hVjjuuhxz69");
-		test.add("R_3aWZe420RdRUUPb");
-		
-		return test;
-	}*/
 	
 	private ArrayList<String> check(Document doc) throws SQLException {
 		//get array of citations for this document
@@ -127,7 +104,6 @@ public class CheckPlagiarism {
 			
 		}
 		
-		//System.out.println(_plagResult);
 		return idSame;
 		
 	}
@@ -165,80 +141,5 @@ public class CheckPlagiarism {
 		return _sanitizedCitations;
 	}
 	
-/*	private void getCorpusAll() throws PersistenceException, ResourceInstantiationException {
-		RunGate gate = new RunGate();
-		gate.runAll();
-		
-		_all = gate.get_corpusAll();
-	}*/
-	
-	/*	*//**
-	 * Method to get all citations and put it in a format that can be used for mysql import
-	 * Method is commented out, because it is no more needen in here
-	 * Consider making a separate class for it, if you want to keep the code.
-	 * @author setarosd
-	 *//*
-	private void writeAllCitations() {
-		for (int i = 0; i < _all.size(); i++) {
-			Document refDoc = _all.get(i);
-			AnnotationSet annotRef = refDoc.getAnnotations().get("Citation");
-
-			
-			//create array for citation strings
-			Set<String> refList = new HashSet();
-			
-			List<Annotation> references = gate.Utils.inDocumentOrder(annotRef);
-			for(Annotation reference : references) {
-				//print citations
-				//System.out.println(documentID + ": " + gate.Utils.stringFor(each, ann));
-				String refCitation = stringFor(refDoc, reference);
-				
-				refCitation = sanitizeCitation(refCitation);
-				
-				refList.add(refCitation);
-				
-			}
-			
-			Iterator iter = refList.iterator();
-			while (iter.hasNext()) {
-				Object object = (Object) iter.next();
-				System.out.println(object + "@" + stringFor(refDoc, refDoc.getAnnotations("Original markups").get("ResponseID")));
-			}
-			
-		}
-	}*/
-	
-	/*	*//**
-	 * This was code to get all citations for mysql import.
-	 * Not needed here anymore
-	 * @author setarosd
-	 * @param doc
-	 * @throws IOException
-	 *//*
-	public void plagcheckFile(Document doc) throws IOException {
-		OutputStream outputstream = null;
-		PrintStream printstream = null;
-		
-		try {
-			try {
-				outputstream = new FileOutputStream(System.getProperty("user.dir") + "/" + "citations.txt");
-			} catch (FileNotFoundException e) {
-				System.out.println("Error while creating output file.");
-				e.printStackTrace();
-			}
-			printstream = new PrintStream(outputstream);
-			System.setOut(printstream);
-			
-
-			check(doc);
-
-			
-		} finally {
-			printstream.close();
-			outputstream.close();
-			System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
-		}
-	}*/
-
 
 }
