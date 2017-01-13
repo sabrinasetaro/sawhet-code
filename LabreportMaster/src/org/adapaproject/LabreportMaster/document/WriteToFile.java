@@ -32,7 +32,7 @@ public class WriteToFile {
 		String id = CreateContentDocument.get_id();
 		String ta = CreateContentDocument.get_tA();
 		StringBuffer directory = new StringBuffer();
-		directory.append("/home/setarosd/git/gate/outputTAs/");
+		directory.append("/home/setarosd/gate/outputTAs/");
 		directory.append(ta);
 		directory.append("/");
 		
