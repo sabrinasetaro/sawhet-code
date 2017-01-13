@@ -62,9 +62,9 @@ public class RunGate {
 	private void createSmallCorpus() throws ResourceInstantiationException, IOException {
 		_corpus = Factory.newCorpus("newCorpus");
 		URL qualtrics;
-
-		qualtrics = new URL("https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID=" + _surveyID + "&LastResponseID=" + _lastLabreportID);
 		
+		qualtrics = new URL("https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID=" + _surveyID + "&LastResponseID=" + _lastLabreportID);
+				
 		//populate corpus
 		try {
 			gate.corpora.CorpusImpl.populate(_corpus, qualtrics, "Response", "utf-8", 0, "LabReport", "text/xml", true);
@@ -76,6 +76,7 @@ public class RunGate {
 		} catch (Exception e) {
 			System.err.println("There was some problem with downloading data from qualtrics. Try again later.");
 		}
+		
 	}
 	
 	private void createCorpusAll() throws PersistenceException, ResourceInstantiationException {
@@ -124,8 +125,6 @@ public class RunGate {
 	 */
 	private void initialize() throws GateException {
 
-		//for exporting only
-		//_home = System.getProperty("user.dir");
 		Gate.setGateHome(new File(_home));
 		Gate.setUserConfigFile(new File(_home + "/gate/userConfig.xml"));
 		Gate.setPluginsHome(new File(_home + "/gate/plugins"));
@@ -179,7 +178,7 @@ public class RunGate {
 		dsCorpus = (Corpus) Factory.createResource("gate.corpora.SerialCorpusImpl", features);
 		System.out.println("Size of corpus in datastore: " + dsCorpus.size());
 		//TODO: this is only for testing!
-		dsCorpus.clear();
+		//dsCorpus.clear();
 		
 		//add new documents to datastore corpus; uncomment this, if you need to stop adding new documents to database
 		for (int i = 0; i < _corpus.size(); i++) {

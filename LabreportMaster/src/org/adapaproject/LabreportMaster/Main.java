@@ -88,6 +88,7 @@ public class Main {
 								WritetoDatabase dbInsert = new WritetoDatabase();
 								try {
 									dbInsert.insertCitations();
+									System.out.println("MyEmail: " + myEmail);
 								} catch (Exception e) {
 									System.err.println("Citations were not saved in database.");
 									e.printStackTrace();
@@ -102,21 +103,26 @@ public class Main {
 								System.err.println("Database could not be instantiated.");
 								e1.printStackTrace();
 							} 
+						} else {
+							System.out.println("Lab report is from Sabrina Setaro and was not saved in database.");
 						}
 						
 						if (!myEmail.equals("setarosd@wfu.edu")) {
 							//add to Mimir
 							try {
 								gate.addtoMimir(doc, CreateContentDocument.get_id());
+								System.out.println("Would like to save to mimir if I may.");
 							} catch (Exception e) {
 								System.err.println("Saving to mimir failed.");
 								e.printStackTrace();
 							} 
+						} else {
+							System.out.println("Lab report is from Sabrina Setaro and was not saved in Mimir.");
 						}
 											
 					}
 					//TODO:inactivated for testing only
-					//gate.addtoDatastore();
+					gate.addtoDatastore();
 					
 					Factory.deleteResource(corpus);
 					
