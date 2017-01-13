@@ -171,8 +171,6 @@ public class RunGate {
 
 		dsCorpus = (Corpus) Factory.createResource("gate.corpora.SerialCorpusImpl", features);
 		System.out.println("Size of corpus in datastore: " + dsCorpus.size());
-		//TODO: this is only for testing!
-		dsCorpus.clear();
 		
 		//add new documents to datastore corpus; uncomment this, if you need to stop adding new documents to database
 		for (int i = 0; i < _corpus.size(); i++) {
