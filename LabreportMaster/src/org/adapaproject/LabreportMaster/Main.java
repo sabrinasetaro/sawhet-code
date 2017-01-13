@@ -78,7 +78,6 @@ public class Main {
 						dbInsert.insertLabreports();
 											
 					}
-					//TODO:inactivated for testing only
 					gate.addtoDatastore();
 					
 					Factory.deleteResource(corpus);
