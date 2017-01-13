@@ -43,15 +43,11 @@ public class CreateContentDocument {
 		_date = stringFor(_doc, _original.get("EndDate"));
 		_number = (String) stringFor(_doc, _original.get("QID17"));
 
-		
-		//printLabreport();
 	}
 	
 	
 	public void printLabreport() throws IOException, InvalidFormatException {
 		
-		//AnnotationSet citation = _results.get("Citation");
-		//AnnotationSet biology = _results.get("Biology");
 		StringBuffer text = new StringBuffer();
 		
 		//create a word document
@@ -362,10 +358,7 @@ public class CreateContentDocument {
 	}
 
 	private static String getWordNo(String question, String info) {
-/*		AnnotationSet token = _results.get("Token");
-		AnnotationSet split = _results.get("Split");
-		long paragraphSize = (getOverlappingAnnotations(token, _original.get(question))).size() - (getOverlappingAnnotations(split, _original.get(question))).size();
-		*/
+
 		return info + stringFor(_doc, _original.get(question));
 	}
 
