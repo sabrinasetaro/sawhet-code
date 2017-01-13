@@ -55,6 +55,7 @@ public class RunGate {
 		initialize();
 		loadController();
 		createSmallCorpus();
+		checkforLastID();
 		execute();
 	}
 	
@@ -114,6 +115,20 @@ public class RunGate {
 		return error;
 	}
 	
+	//this shall make sure that lab report executions are not repeated on lab reports that have been already processed.
+	private void checkforLastID() {
+		
+		for (int i = 0; i < _corpus.size(); i++) {
+			if(_corpus.get(i).getAnnotations("Original markups").get("ResponseID").equals(_lastLabreportID)) {
+				System.err.println("Program exited, because last reported id present in corpus. Check if Qualtrics Survey ID is correct!");
+				System.exit(0);
+			} else {
+				System.out.println("Everything clear: Last labreport from data base not present in corpus.");
+			}
+		}
+				
+	}
+
 	private void createCorpusAll() throws PersistenceException, ResourceInstantiationException {
 		_ds = this.getDatastore("file:" + _home + "/gate/datastoreLabreports");
 
