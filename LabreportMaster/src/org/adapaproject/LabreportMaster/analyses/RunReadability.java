@@ -26,10 +26,8 @@ public class RunReadability {
 		
 		String[] paragraphs = {"QID34", "QID2", "QID3", "QID4", "QID5"};
     	for (int i = 0; i < paragraphs.length; i++) {
-    		//String[] helper = {"abstract", "introduction", "materials and methods", "results", "discussion"};
 			String part = paragraphs[i];
 			Long gl = getGradeLevelParagraph(doc, part);
-			//String result = gl;
 			
 			if (i == 0) {
 				_abstract = gl;
