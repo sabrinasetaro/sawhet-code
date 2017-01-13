@@ -73,7 +73,6 @@ public class Main {
 						new CreateAnalysesDocument(doc, plagcheck);
 						
 						//send email
-						//TODO: change back after testing
 						try {
 							new Email();
 							System.out.println("Email was sent.");
