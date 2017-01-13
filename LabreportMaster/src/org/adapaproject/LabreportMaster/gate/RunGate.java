@@ -5,8 +5,15 @@ package org.adapaproject.LabreportMaster.gate;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.compress.utils.IOUtils;
 
 import gate.Corpus;
 import gate.CorpusController;
@@ -61,10 +68,23 @@ public class RunGate {
 	 */
 	private void createSmallCorpus() throws ResourceInstantiationException, IOException {
 		_corpus = Factory.newCorpus("newCorpus");
-		URL qualtrics;
+		URL qualtrics = null;
 		
-		qualtrics = new URL("https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID=" + _surveyID + "&LastResponseID=" + _lastLabreportID);
-				
+		qualtrics = new URL(
+				"https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID="
+						+ _surveyID + "&LastResponseID=" + _lastLabreportID);
+
+		//check for 400 error to see if lastId is present or not
+		if(checkfor400Error(qualtrics) == true) {
+			System.out.println("Change to other url to download all data in survey.");
+			qualtrics = new URL(
+					"https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID="
+							+ _surveyID);
+		}
+
+		
+			
+		
 		//populate corpus
 		try {
 			gate.corpora.CorpusImpl.populate(_corpus, qualtrics, "Response", "utf-8", 0, "LabReport", "text/xml", true);
@@ -77,6 +97,19 @@ public class RunGate {
 			System.err.println("There was some problem with downloading data from qualtrics. Try again later.");
 		}
 		
+	}
+
+	private boolean checkfor400Error(URL qualtrics) throws IOException {
+		boolean error = false;
+		URLConnection connection = qualtrics.openConnection();
+		Map<String, List<String>> map = connection.getHeaderFields();
+		System.out.println("Printing All Response Header for URL: " + qualtrics.toString() + "\n");
+
+		if (map.get("Status").get(0).equals("400")) {
+			System.out.println("400 Error");
+			error = true;
+		}
+		return error;
 	}
 	
 	private void createCorpusAll() throws PersistenceException, ResourceInstantiationException {
