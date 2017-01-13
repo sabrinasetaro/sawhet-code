@@ -39,6 +39,9 @@ public class Main {
 		
 		//needed as logger
     	BasicConfigurator.configure();
+    	
+    	//start tracking time
+    	long startTime = System.currentTimeMillis();
 		
 		if (args.length == 2) {
 			
@@ -82,7 +85,8 @@ public class Main {
 					//gate.addtoDatastore();
 					
 					Factory.deleteResource(corpus);
-					System.out.println("done");
+					
+					timeCalculator(startTime);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -91,9 +95,15 @@ public class Main {
 		} else {
 			System.out.println("USAGE: java -jar LabreportMaster.java [Qualtrics Survey ID] [DataStore Corpus name]");
 		}
-		
 
-
+	}
+	
+	private static void timeCalculator(long startTime) {
+		//calculate how long it took to run
+		long endTime = System.currentTimeMillis();
+		long totalTime = (endTime - startTime) / 1000;
+		System.out.println();
+		System.out.println("Finished after " + totalTime + " seconds.");
 	}
 
 }
