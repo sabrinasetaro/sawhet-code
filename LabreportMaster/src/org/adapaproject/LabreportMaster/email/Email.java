@@ -42,9 +42,8 @@ public class Email {
 		//String studentEmail = CreateContentDocument.get_email();
 		_taName = CreateContentDocument.get_tA();
 
-		//TODO: switch back to Dan's email during production
-		//_toTA = "johnsoad@wfu.edu";
-		_toTA = "sabrina.setaro@gmail.com";
+		_toTA = "johnsoad@wfu.edu";
+		//_toTA = "sabrina.setaro@gmail.com";
 		_subject = CreateContentDocument.get_name();
 
 		//this is the directory to the file previously generated
