@@ -73,8 +73,12 @@ public class Main {
 						new CreateAnalysesDocument(doc, plagcheck);
 						
 						//send email
-						//TODO: change back after testing
-						//new Email();
+						try {
+							new Email();
+							System.out.println("Email was sent.");
+						} catch (Exception e) {
+							System.err.println("Email was not sent, there was some problem.");
+						}
 						
 						//added to avoid saving testing data
 						String myEmail = CreateContentDocument.get_email();
