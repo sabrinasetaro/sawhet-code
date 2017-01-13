@@ -68,9 +68,13 @@ public class RunGate {
 		//populate corpus
 		try {
 			gate.corpora.CorpusImpl.populate(_corpus, qualtrics, "Response", "utf-8", 0, "LabReport", "text/xml", true);
-			System.out.println("Corpus size: " + _corpus.size());
+			if (_corpus.size() != 0) {
+				System.out.println("Corpus size: " + _corpus.size());
+			} else {
+				System.out.println("Database is up to date - no new lab reports were submitted.");
+			}
 		} catch (Exception e) {
-			System.err.println("There was either no new lab reports or some problem with downloading data from qualtrics. Try again later.");
+			System.err.println("There was some problem with downloading data from qualtrics. Try again later.");
 		}
 	}
 	
