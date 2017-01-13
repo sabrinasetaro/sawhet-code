@@ -8,7 +8,6 @@ import java.io.IOException;
 import org.adapaproject.LabreportMaster.analyses.CheckPlagiarism;
 import org.adapaproject.LabreportMaster.analyses.StatAnalyses;
 import org.adapaproject.LabreportMaster.analyses.CreateAnalysesDocument;
-import org.adapaproject.LabreportMaster.database.Database;
 import org.adapaproject.LabreportMaster.database.WritetoDatabase;
 import org.adapaproject.LabreportMaster.database.tables.LabreportsManager;
 import org.adapaproject.LabreportMaster.document.CreateContentDocument;
