@@ -47,8 +47,6 @@ public class WriteToFile {
 					_textDirectory = directory.toString();
 					directory.append(".txt");
 					
-					
-					
 					break;
 					
 				case ANALYSIS:
@@ -60,7 +58,6 @@ public class WriteToFile {
 					_analysisDirectory = directory.toString();
 				}
 				
-				//outputstream = new FileOutputStream(System.getProperty("user.dir") + "/" + id + "_text.txt");
 				outputstream = new FileOutputStream(directory.toString());
 			} catch (FileNotFoundException e) {
 				System.out.println("Error while creating output file.");
