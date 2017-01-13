@@ -75,8 +75,12 @@ public class Main {
 						new Email();
 						
 						WritetoDatabase dbInsert = new WritetoDatabase();
+
 						dbInsert.insertCitations();
 						dbInsert.insertLabreports();
+						
+						//add to Mimir
+						gate.addtoMimir(doc, CreateContentDocument.get_id());
 											
 					}
 					gate.addtoDatastore();
