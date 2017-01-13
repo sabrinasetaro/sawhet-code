@@ -76,9 +76,22 @@ public class Main {
 						//TODO: change back after testing
 						//new Email();
 						
+						//added to avoid saving testing data
+						String myEmail = CreateContentDocument.get_email();
+						
 						WritetoDatabase dbInsert = new WritetoDatabase();
 						//dbInsert.insertCitations();
 						dbInsert.insertLabreports();
+						
+						if (!myEmail.equals("setarosd@wfu.edu")) {
+							//add to Mimir
+							try {
+								gate.addtoMimir(doc, CreateContentDocument.get_id());
+							} catch (Exception e) {
+								System.err.println("Saving to mimir failed.");
+								e.printStackTrace();
+							} 
+						}
 											
 					}
 					//TODO:inactivated for testing only
