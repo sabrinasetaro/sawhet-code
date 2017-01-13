@@ -27,7 +27,7 @@ import gate.util.persistence.PersistenceManager;
 public class RunGate {
 	
 	private CorpusController _controller;
-	private String _home = "/home/setarosd/git";
+	private String _home = "/home/setarosd";
 	private Corpus _corpus;
 	private Corpus _corpusAll;
 	private String _surveyID;
