@@ -13,7 +13,6 @@ import java.io.PrintStream;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import gate.Document;
-import static gate.Utils.stringFor;
 
 /**
  * @author  setarosd

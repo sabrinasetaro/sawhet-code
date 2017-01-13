@@ -6,7 +6,6 @@ package org.adapaproject.LabreportMaster.analyses;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.adapaproject.LabreportMaster.database.Database;
 import org.adapaproject.LabreportMaster.database.tables.StatisticsManager;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
