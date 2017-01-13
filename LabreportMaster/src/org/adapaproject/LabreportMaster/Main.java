@@ -74,7 +74,7 @@ public class Main {
 						//new Email();
 						
 						WritetoDatabase dbInsert = new WritetoDatabase();
-						//dbInsert.insertCitations();
+						dbInsert.insertCitations();
 						dbInsert.insertLabreports();
 											
 					}
