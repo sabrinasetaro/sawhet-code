@@ -74,7 +74,12 @@ public class Main {
 						
 						//send email
 						//TODO: change back after testing
-						//new Email();
+						try {
+							new Email();
+							System.out.println("Email was sent.");
+						} catch (Exception e) {
+							System.err.println("Email was not sent, there was some problem.");
+						}
 						
 						WritetoDatabase dbInsert = new WritetoDatabase();
 						//dbInsert.insertCitations();
