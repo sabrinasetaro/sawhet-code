@@ -15,6 +15,8 @@ import java.util.Map;
 
 import org.apache.commons.compress.utils.IOUtils;
 
+import com.sun.org.apache.bcel.internal.util.SyntheticRepository;
+
 import gate.Corpus;
 import gate.CorpusController;
 import gate.DataStore;
@@ -76,7 +78,7 @@ public class RunGate {
 
 		//check for 400 error to see if lastId is present or not
 		if(checkfor400Error(qualtrics) == true) {
-			System.out.println("Change to other url to download all data in survey.");
+			System.err.println("Change to other url to download all data in survey.");
 			qualtrics = new URL(
 					"https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID="
 							+ _surveyID);
@@ -106,7 +108,7 @@ public class RunGate {
 		System.out.println("Printing All Response Header for URL: " + qualtrics.toString() + "\n");
 
 		if (map.get("Status").get(0).equals("400")) {
-			System.out.println("400 Error");
+			System.err.println("400 Error");
 			error = true;
 		}
 		return error;
