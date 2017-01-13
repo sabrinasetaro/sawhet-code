@@ -79,7 +79,7 @@ public class Main {
 											
 					}
 					//TODO:inactivated for testing only
-					//gate.addtoDatastore();
+					gate.addtoDatastore();
 					
 					Factory.deleteResource(corpus);
 					System.out.println("done");
