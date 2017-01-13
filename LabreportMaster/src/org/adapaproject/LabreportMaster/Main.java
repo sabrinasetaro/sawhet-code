@@ -83,9 +83,26 @@ public class Main {
 						//added to avoid saving testing data
 						String myEmail = CreateContentDocument.get_email();
 						
-						WritetoDatabase dbInsert = new WritetoDatabase();
-						//dbInsert.insertCitations();
-						dbInsert.insertLabreports();
+						if (!myEmail.equals("setarosd@wfu.edu")) {
+							try {
+								WritetoDatabase dbInsert = new WritetoDatabase();
+								try {
+									dbInsert.insertCitations();
+								} catch (Exception e) {
+									System.err.println("Citations were not saved in database.");
+									e.printStackTrace();
+								}
+								try {
+									dbInsert.insertLabreports();
+								} catch (Exception e) {
+									System.err.println("Labreport info was not saved in database.");
+									e.printStackTrace();
+								}
+							} catch (Exception e1) {
+								System.err.println("Database could not be instantiated.");
+								e1.printStackTrace();
+							} 
+						}
 						
 						if (!myEmail.equals("setarosd@wfu.edu")) {
 							//add to Mimir
