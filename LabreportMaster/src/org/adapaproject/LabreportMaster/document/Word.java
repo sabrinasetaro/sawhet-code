@@ -41,7 +41,7 @@ public class Word {
 	public void saveWord(String filename) throws IOException {
 		String ta = CreateContentDocument.get_tA();
 		StringBuffer directory = new StringBuffer();
-		directory.append("/home/setarosd/git/gate/outputTAs/");
+		directory.append("/home/setarosd/gate/outputTAs/");
 		directory.append(ta);
 		directory.append("/labreport/");
 		FileOutputStream output = new FileOutputStream(directory + filename + ".docx");
