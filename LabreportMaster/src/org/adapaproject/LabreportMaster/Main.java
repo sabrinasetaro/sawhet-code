@@ -70,8 +70,7 @@ public class Main {
 						new CreateAnalysesDocument(doc, plagcheck);
 						
 						//send email
-						//TODO: change back after testing
-						//new Email();
+						new Email();
 						
 						WritetoDatabase dbInsert = new WritetoDatabase();
 						dbInsert.insertCitations();
