@@ -60,8 +60,7 @@ public class Word {
 		String imgFile = "image.png";
 		FileInputStream is = new FileInputStream(imgFile);
 		ImageFromURL im = new ImageFromURL();
-		//run_image.addPicture(is, XWPFDocument.PICTURE_TYPE_PNG, imgFile, Units.toEMU(im.get_width()), Units.toEMU(im.get_height()));
-		//run_image.addPicture(is, XWPFDocument.PICTURE_TYPE_PNG, imgFile, Units.toEMU(588), Units.toEMU(344));
+
 		run_image.addPicture(is, XWPFDocument.PICTURE_TYPE_PNG, imgFile, Units.toEMU(470.4), Units.toEMU(275.2));
 
 		is.close();
