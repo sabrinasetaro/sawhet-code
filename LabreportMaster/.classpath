@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-1.7.0-openjdk-1.7.0.121.x86_64"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Gate Jars"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Other Jars"/>
+	<classpathentry kind="lib" path="/home/setarosd/git/otherJars/commons-math3-3.6.1.jar"/>
+	<classpathentry kind="lib" path="/home/setarosd/git/otherJars/commons-math3-3.6.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="/home/setarosd/git/otherJars/commons-math3-3.6.1-sources.jar"/>
+	<classpathentry kind="lib" path="/home/setarosd/git/otherJars/commons-math3-3.6.1-tests.jar"/>
+	<classpathentry kind="lib" path="/home/setarosd/git/otherJars/commons-math3-3.6.1-test-sources.jar"/>
+	<classpathentry kind="lib" path="/home/setarosd/git/otherJars/commons-math3-3.6.1-tools.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
