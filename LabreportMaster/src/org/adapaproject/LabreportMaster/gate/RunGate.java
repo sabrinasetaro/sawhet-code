@@ -55,8 +55,8 @@ public class RunGate {
 		initialize();
 		loadController();
 		createSmallCorpus();
-		checkforLastID();
 		execute();
+		checkforLastID();
 	}
 	
 	public void runAll() throws PersistenceException, ResourceInstantiationException {
