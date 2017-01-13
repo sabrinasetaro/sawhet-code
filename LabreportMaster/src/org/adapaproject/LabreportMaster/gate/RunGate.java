@@ -5,6 +5,7 @@ package org.adapaproject.LabreportMaster.gate;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import gate.Corpus;
@@ -16,6 +17,8 @@ import gate.FeatureMap;
 import gate.Gate;
 import gate.creole.ExecutionException;
 import gate.creole.ResourceInstantiationException;
+import gate.mimir.index.MimirConnector;
+import gate.mimir.tool.WebUtils;
 import gate.persist.PersistenceException;
 import gate.util.GateException;
 import gate.util.persistence.PersistenceManager;
@@ -183,6 +186,20 @@ public class RunGate {
 		System.out.println("Size of corpus in datastore is now: " + dsCorpus.size());
 		Factory.deleteResource(dsCorpus);
 		ds.close();
+		
+	}
+	
+	public void addtoMimir(Document doc, String labreportID) throws MalformedURLException, IOException, InterruptedException {
+		MimirConnector index = null;
+		try {
+			index = new MimirConnector(
+					new URL("http://biolabs.wfu.edu/mimir-cloud-5.2/454a9100-199e-4a09-b758-fa4c72f7683c"),
+					new WebUtils("manager", "addPilz343$"));
+			index.sendToMimir(doc, labreportID);
+			System.out.println("Document added to Mimir (http://biolabs.wfu.edu/mimir-cloud-5.2/454a9100-199e-4a09-b758-fa4c72f7683c).");
+		} finally {
+			index.close();
+		}
 		
 	}
 	

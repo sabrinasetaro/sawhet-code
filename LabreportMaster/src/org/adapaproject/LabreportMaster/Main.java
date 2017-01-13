@@ -78,7 +78,10 @@ public class Main {
 						
 						WritetoDatabase dbInsert = new WritetoDatabase();
 						//dbInsert.insertCitations();
-						dbInsert.insertLabreports();
+						//dbInsert.insertLabreports();
+						
+						//add to Mimir
+						gate.addtoMimir(doc, CreateContentDocument.get_id());
 											
 					}
 					//TODO:inactivated for testing only
