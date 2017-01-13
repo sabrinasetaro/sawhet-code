@@ -3,16 +3,12 @@
  */
 package org.adapaproject.LabreportMaster.database;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.adapaproject.LabreportMaster.analyses.CheckPlagiarism;
 import org.adapaproject.LabreportMaster.database.beans.Citation;
-import org.adapaproject.LabreportMaster.database.beans.Course;
 import org.adapaproject.LabreportMaster.database.beans.Labreport;
-import org.adapaproject.LabreportMaster.database.beans.TeachingAssistant;
-import org.adapaproject.LabreportMaster.database.beans.Undergraduate;
 import org.adapaproject.LabreportMaster.database.tables.CitationsManager;
 import org.adapaproject.LabreportMaster.database.tables.CoursesManager;
 import org.adapaproject.LabreportMaster.database.tables.LabreportsManager;
