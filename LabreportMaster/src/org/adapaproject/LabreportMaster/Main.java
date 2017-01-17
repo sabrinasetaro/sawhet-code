@@ -118,7 +118,7 @@ public class Main {
 								e.printStackTrace();
 							} 
 						} else {
-							System.out.println("Lab report is from Sabrina Setaro and was not saved in Mimir.");
+							System.out.println("Lab report is from Sabrina Setaro and was not saved to Mimir.");
 						}
 											
 					}
