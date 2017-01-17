@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.adapaproject.LabreportMaster.gate.RunGate;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -41,7 +42,8 @@ public class Word {
 	public void saveWord(String filename) throws IOException {
 		String ta = CreateContentDocument.get_tA();
 		StringBuffer directory = new StringBuffer();
-		directory.append("/home/setarosd/gate/outputTAs/");
+		directory.append(RunGate.get_home());
+		directory.append("/gate/outputTAs/");
 		directory.append(ta);
 		directory.append("/labreport/");
 		FileOutputStream output = new FileOutputStream(directory + filename + ".docx");
