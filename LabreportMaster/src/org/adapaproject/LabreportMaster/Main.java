@@ -104,6 +104,8 @@ public class Main {
 							} 
 						} else {
 							System.out.println("Lab report is from Sabrina Setaro and was not saved in database.");
+							log.error("this is bad");
+
 						}
 						
 						if (!myEmail.equals("setarosd@wfu.edu")) {
