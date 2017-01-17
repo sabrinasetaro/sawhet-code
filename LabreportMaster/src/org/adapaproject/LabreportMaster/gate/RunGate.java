@@ -260,7 +260,7 @@ public class RunGate {
 		return _corpusAll;
 	}
 	
-	public String get_home() {
+	public static String get_home() {
 		return _home;
 	}
 
