@@ -111,6 +111,19 @@ public class RunGate {
 				
 	}
 	
+	private boolean checkfor400Error(URL qualtrics) throws IOException {
+		boolean error = false;
+		URLConnection connection = qualtrics.openConnection();
+		Map<String, List<String>> map = connection.getHeaderFields();
+		System.out.println("Printing All Response Header for URL: " + qualtrics.toString() + "\n");
+
+		if (map.get("Status").get(0).equals("400")) {
+			System.err.println("400 Error");
+			error = true;
+		}
+		return error;
+	}
+	
 	private void createCorpusAll() throws PersistenceException, ResourceInstantiationException {
 		_ds = this.getDatastore("file:" + _home + "/gate/datastoreLabreports");
 
