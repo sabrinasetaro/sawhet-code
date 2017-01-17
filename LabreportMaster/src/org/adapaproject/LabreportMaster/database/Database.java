@@ -9,8 +9,8 @@ package org.adapaproject.LabreportMaster.database;
  */
 public class Database {
 	
-	private static final String USERNAME = "labreports";
-	private static final String PASSWORD = "schreibGut#1999";
+	private static final String USERNAME = "root";
+	private static final String PASSWORD = "Malen2Zahlen587*";
 	private static final String CONN_STRING = "jdbc:mysql://localhost/labreport_info";
 
 
