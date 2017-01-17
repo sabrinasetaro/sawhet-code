@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
+import org.adapaproject.LabreportMaster.gate.RunGate;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import gate.Document;
@@ -32,7 +33,8 @@ public class WriteToFile {
 		String id = CreateContentDocument.get_id();
 		String ta = CreateContentDocument.get_tA();
 		StringBuffer directory = new StringBuffer();
-		directory.append("/home/setarosd/gate/outputTAs/");
+		directory.append(RunGate.get_home());
+		directory.append("/gate/outputTAs/");
 		directory.append(ta);
 		directory.append("/");
 		
