@@ -39,7 +39,7 @@ import gate.util.persistence.PersistenceManager;
 public class RunGate {
 	
 	private CorpusController _controller;
-	private static String _home = "/usr/share/sawhet";
+	private static String _home = "/home/setarosd/git";
 
 	private Corpus _corpus;
 	private Corpus _corpusAll;
