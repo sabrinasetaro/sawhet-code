@@ -5,8 +5,17 @@ package org.adapaproject.LabreportMaster.gate;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.compress.utils.IOUtils;
+
+import com.sun.org.apache.bcel.internal.util.SyntheticRepository;
 
 import gate.Corpus;
 import gate.CorpusController;
@@ -47,6 +56,7 @@ public class RunGate {
 		loadController();
 		createSmallCorpus();
 		execute();
+		checkforLastID();
 	}
 	
 	public void runAll() throws PersistenceException, ResourceInstantiationException {
@@ -61,10 +71,19 @@ public class RunGate {
 	 */
 	private void createSmallCorpus() throws ResourceInstantiationException, IOException {
 		_corpus = Factory.newCorpus("newCorpus");
-		URL qualtrics;
+		URL qualtrics = null;
 
-		qualtrics = new URL("https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID=" + _surveyID + "&LastResponseID=" + _lastLabreportID);
-		
+		qualtrics = new URL(
+				"https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID="
+						+ _surveyID + "&LastResponseID=" + _lastLabreportID);
+
+		//check for 400 error to see if lastId is present or not
+		if(checkfor400Error(qualtrics) == true) {
+			System.err.println("Change to other url to download all data in survey.");
+			qualtrics = new URL(
+					"https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID="
+							+ _surveyID);
+		}
 		//populate corpus
 		try {
 			gate.corpora.CorpusImpl.populate(_corpus, qualtrics, "Response", "utf-8", 0, "LabReport", "text/xml", true);
@@ -76,6 +95,20 @@ public class RunGate {
 		} catch (Exception e) {
 			System.err.println("There was some problem with downloading data from qualtrics. Try again later.");
 		}
+	}
+	
+		//this shall make sure that lab report executions are not repeated on lab reports that have been already processed.
+	private void checkforLastID() {
+		
+		for (int i = 0; i < _corpus.size(); i++) {
+			if(_corpus.get(i).getAnnotations("Original markups").get("ResponseID").equals(_lastLabreportID)) {
+				System.err.println("Program exited, because last reported id present in corpus. Check if Qualtrics Survey ID is correct!");
+				System.exit(0);
+			} else {
+				System.out.println("Everything clear: Last labreport from data base not present in corpus.");
+			}
+		}
+				
 	}
 	
 	private void createCorpusAll() throws PersistenceException, ResourceInstantiationException {

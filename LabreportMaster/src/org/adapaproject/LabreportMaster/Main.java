@@ -81,12 +81,13 @@ public class Main {
 						
 						//added to avoid saving testing data
 						String myEmail = CreateContentDocument.get_email();
-
+						
 						if (!myEmail.equals("setarosd@wfu.edu")) {
 							try {
 								WritetoDatabase dbInsert = new WritetoDatabase();
 								try {
 									dbInsert.insertCitations();
+									System.out.println("MyEmail: " + myEmail);
 								} catch (Exception e) {
 									System.err.println("Citations were not saved in database.");
 									e.printStackTrace();
@@ -101,25 +102,30 @@ public class Main {
 								System.err.println("Database could not be instantiated.");
 								e1.printStackTrace();
 							} 
+						} else {
+							System.out.println("Lab report is from Sabrina Setaro and was not saved in database.");
+							log.error("this is bad");
+
 						}
+						
 						if (!myEmail.equals("setarosd@wfu.edu")) {
 							//add to Mimir
 							try {
 								gate.addtoMimir(doc, CreateContentDocument.get_id());
+								System.out.println("Would like to save to mimir if I may.");
 							} catch (Exception e) {
 								System.err.println("Saving to mimir failed.");
 								e.printStackTrace();
 							} 
+						} else {
+							System.out.println("Lab report is from Sabrina Setaro and was not saved in Mimir.");
 						}
 											
 					}
 					
-					try {
-						//gate.addtoDatastore();
-					} catch (Exception e) {
-						System.err.println("New documents in corpus were not added to datastore.");
-						e.printStackTrace();
-					}
+					//TODO:inactivated for testing only
+					gate.addtoDatastore();
+					
 					Factory.deleteResource(corpus);
 					
 					timeCalculator(startTime);
