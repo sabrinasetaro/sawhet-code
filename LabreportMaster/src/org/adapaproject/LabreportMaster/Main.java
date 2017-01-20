@@ -135,7 +135,16 @@ public class Main {
 			}
 			
 		} else {
-			System.out.println("USAGE: java -jar LabreportMaster.java [Qualtrics Survey ID] [DataStore Corpus name]");
+			System.out.println();
+			System.out.println("***************************************************************************************");
+			System.out.println("* PROCESS LAB REPORTS WAITING IN QUALTRICS                                            *");
+			System.out.println("*                                                                                     *");
+			System.out.println("* INFO: written by Sabrina D. Setaro (setarosd@wfu.edu) in 2017                       *");
+			System.out.println("*       published under the GNU General Public License                                *");
+			System.out.println("*                                                                                     *");
+			System.out.println("* USAGE: java -jar LabreportMaster.java [Qualtrics_Survey_ID] [DataStore_Corpus_name] *");
+			System.out.println("***************************************************************************************");
+			System.out.println();
 		}
 
 	}
