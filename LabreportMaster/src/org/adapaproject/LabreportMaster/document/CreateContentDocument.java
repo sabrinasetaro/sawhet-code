@@ -70,8 +70,19 @@ public class CreateContentDocument {
 			//add text to worddoc
 			worddoc.addContentWORD("Number of lab report in semester: second", false);
 
-			
 		}
+		
+		try {
+			String type = stringFor(_doc, _original.get("QID90"));
+			if (type.equals("normal")) {
+				text.append("This is a regular lab report.\n");
+			} else if (type.equals("rewrite")) {
+				text.append("This is a rewrite of a previous lab report.\n");
+			}
+		} catch (Exception e) {
+			//do nothing
+		}
+		
 		text.append("Date submitted: ");
 		text.append(_date);
 		text.append("\n");
