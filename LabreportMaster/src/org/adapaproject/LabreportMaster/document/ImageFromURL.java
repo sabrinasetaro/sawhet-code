@@ -31,7 +31,7 @@ public class ImageFromURL {
 	public void deleteImage() {
 		try {
 			File imageFile = new File("image.png");
-			imageFile.delete();
+			//imageFile.delete();
 		} catch (Exception e) {
 			System.out.println("Image file could not be deleted, because it is not present.");
 		}

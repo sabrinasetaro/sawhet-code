@@ -59,7 +59,7 @@ public class WritetoDatabase {
 				
 		ArrayList<String> citations = CheckPlagiarism.get_sanitizedCitations();
 				
-		for (int i = 0; i < citations.size(); i++) {
+/*		for (int i = 0; i < citations.size(); i++) {
 			
 			String value = citations.get(i);
 			
@@ -72,7 +72,7 @@ public class WritetoDatabase {
 			if (result) {
 				System.out.println("New row in citations was inserted!");
 			}
-		}
+		}*/
 		
 	}
 
