@@ -3,6 +3,7 @@
  */
 package org.adapaproject.LabreportMaster.database;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -15,9 +16,15 @@ import org.adapaproject.LabreportMaster.database.tables.LabreportsManager;
 import org.adapaproject.LabreportMaster.database.tables.TeachingAssistantsManager;
 import org.adapaproject.LabreportMaster.database.tables.UndergraduatesManager;
 import org.adapaproject.LabreportMaster.document.CreateContentDocument;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
+import gate.Document;
 import gate.creole.ResourceInstantiationException;
 import gate.persist.PersistenceException;
+import gate.AnnotationSet;
+
+import static gate.Utils.stringFor;
+
 
 /**
  * @author setarosd
@@ -25,12 +32,47 @@ import gate.persist.PersistenceException;
  */
 public class WritetoDatabase {
 	
-	private static String _id = CreateContentDocument.get_id();
+	
+	
+/*	private static String _id = CreateContentDocument.get_id();
 	private static String _date = CreateContentDocument.get_date();
 	private static String _number = CreateContentDocument.get_number();
 	private static String _course = CreateContentDocument.get_course();
 	private static String _email = CreateContentDocument.get_email();
-	private static String _taEmail = CreateContentDocument.get_tA_email();
+	private static String _taEmail = CreateContentDocument.get_tA_email();*/
+	
+	private static String _id;
+	private static String _date;
+	private static String _number;
+	private static String _course ;
+	private static String _email;
+	private static String _taEmail;
+	private static AnnotationSet _original;
+	
+	
+	public WritetoDatabase(Document doc) throws InvalidFormatException, IOException {
+		
+		CreateContentDocument create = new CreateContentDocument(doc);
+		
+/*		_original = doc.getAnnotations("Original markups");
+		_id = stringFor(doc, _original.get("ResponseID"));
+		//TODO: for testing
+		System.out.println("ID_now: " + _id);
+		_email = stringFor(doc, _original.get("EmailAddress"));
+		//_name = stringFor(doc, _original.get("Name"));
+		_date = stringFor(doc, _original.get("EndDate"));
+		_number = (String) stringFor(doc, _original.get("QID17"));
+		_course = create.checkCourse();*/
+		
+		_id = CreateContentDocument.get_id();
+		System.out.println("ID in WritetoDatabase: " + _id);
+		_date = CreateContentDocument.get_date();
+		System.out.println("date in WritetoDatabase: " + _date);
+		_number = CreateContentDocument.get_number();
+		_course = CreateContentDocument.get_course();
+		_email = CreateContentDocument.get_email();
+		_taEmail = CreateContentDocument.get_tA_email();
+	}
 
 	public void insertLabreports() throws SQLException, PersistenceException, ResourceInstantiationException {
 		
@@ -59,8 +101,9 @@ public class WritetoDatabase {
 				
 		ArrayList<String> citations = CheckPlagiarism.get_sanitizedCitations();
 				
-/*		for (int i = 0; i < citations.size(); i++) {
+		for (int i = 0; i < citations.size(); i++) {
 			
+			System.out.println("citation size: " + citations.size());
 			String value = citations.get(i);
 			
 			Citation bean = new Citation();
@@ -72,7 +115,7 @@ public class WritetoDatabase {
 			if (result) {
 				System.out.println("New row in citations was inserted!");
 			}
-		}*/
+		}
 		
 	}
 

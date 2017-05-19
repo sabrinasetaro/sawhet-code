@@ -45,6 +45,13 @@ public class CreateContentDocument {
 
 	}
 	
+	public void getInfoDatabase() {
+		_id = stringFor(_doc, _original.get("ResponseID"));
+		_email = stringFor(_doc, _original.get("EmailAddress"));
+		_name = stringFor(_doc, _original.get("Name"));
+		_date = stringFor(_doc, _original.get("EndDate"));
+		_number = (String) stringFor(_doc, _original.get("QID17"));
+	}
 	
 	public void printLabreport() throws IOException, InvalidFormatException {
 		
@@ -330,7 +337,7 @@ public class CreateContentDocument {
 		image.deleteImage();
 	}
 	
-	private String checkCourse() {
+	public String checkCourse() {
 		String course = null;
 		if (stringFor(_doc, _original.get("Course2")).isEmpty()) {
 			course = stringFor(_doc, _original.get("Course1"));
@@ -347,7 +354,7 @@ public class CreateContentDocument {
 		return course;
 	}
 
-	private String checkTA() {
+	public String checkTA() {
 		String tA = null;
 		if (stringFor(_doc, _original.get("TA2Name")).isEmpty()) {
 			tA = stringFor(_doc, _original.get("TA1Name"));

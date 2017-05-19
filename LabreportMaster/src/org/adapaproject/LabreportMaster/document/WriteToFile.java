@@ -30,6 +30,7 @@ public class WriteToFile {
 	public WriteToFile(Document doc, Type typeOfDoc, StringBuffer text) throws IOException, InvalidFormatException {
 		OutputStream outputstream = null;
 		PrintStream printstream = null;
+		
 		String id = CreateContentDocument.get_id();
 		String ta = CreateContentDocument.get_tA();
 		StringBuffer directory = new StringBuffer();

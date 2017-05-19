@@ -65,6 +65,9 @@ public class Main {
 						Document doc = corpus.get(i);
 						//save .txt and .doc files
 						CreateContentDocument content = new CreateContentDocument(doc);
+						//TODO: for bug fixing
+						//content.getInfoDatabase();
+						
 						content.printLabreport();
 						
 						//save analysis file
@@ -84,10 +87,9 @@ public class Main {
 						
 						if (!myEmail.equals("setarosd@wfu.edu")) {
 							try {
-								WritetoDatabase dbInsert = new WritetoDatabase();
+								WritetoDatabase dbInsert = new WritetoDatabase(doc);
 								try {
 									dbInsert.insertCitations();
-									System.out.println("MyEmail: " + myEmail);
 								} catch (Exception e) {
 									System.err.println("Citations were not saved in database.");
 									e.printStackTrace();
@@ -108,8 +110,7 @@ public class Main {
 
 						}
 						
-						//TODO: inactivated for testing only
-/*						if (!myEmail.equals("setarosd@wfu.edu")) {
+						if (!myEmail.equals("setarosd@wfu.edu")) {
 							//add to Mimir
 							try {
 								gate.addtoMimir(doc, CreateContentDocument.get_id());
@@ -120,12 +121,11 @@ public class Main {
 							} 
 						} else {
 							System.out.println("Lab report is from Sabrina Setaro and was not saved to Mimir.");
-						}*/
+						}
 											
 					}
 					
-					//TODO:inactivated for testing only
-					//gate.addtoDatastore();
+					gate.addtoDatastore();
 					
 					Factory.deleteResource(corpus);
 					

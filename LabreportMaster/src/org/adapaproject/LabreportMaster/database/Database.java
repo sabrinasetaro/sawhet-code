@@ -11,7 +11,7 @@ public class Database {
 	
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "Malen2Zahlen587*";
-	private static final String CONN_STRING = "jdbc:mysql://localhost/labreport_info";
+	private static final String CONN_STRING = "jdbc:mysql://localhost/labreports2";
 
 
 	public static String getUsername() {

@@ -42,7 +42,7 @@ public class CheckPlagiarism {
 			_db = new Database();
 		}
 		
-		_sanitizedCitations = new ArrayList<String>();
+		//_sanitizedCitations = new ArrayList<String>();
 	}
 	
 	
@@ -114,6 +114,8 @@ public class CheckPlagiarism {
 		_annotCit = doc.getAnnotations().get("Citation");
 		List<Annotation> citations = gate.Utils.inDocumentOrder(_annotCit);
 		Set<String> citationSet = new HashSet<String>();
+		
+		_sanitizedCitations = new ArrayList<String>();
 
 		for(Annotation citation : citations) {
 			String citationString = stringFor(doc, citation);
