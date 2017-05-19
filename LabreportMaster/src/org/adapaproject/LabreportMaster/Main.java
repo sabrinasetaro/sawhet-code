@@ -85,7 +85,9 @@ public class Main {
 						//added to avoid saving testing data
 						String myEmail = CreateContentDocument.get_email();
 						
-						if (!myEmail.equals("setarosd@wfu.edu")) {
+						//todo: change back after testing
+/*						if (!myEmail.equals("setarosd@wfu.edu")) {*/
+						if (myEmail.equals("setarosd@wfu.edu")) {
 							try {
 								WritetoDatabase dbInsert = new WritetoDatabase(doc);
 								try {
