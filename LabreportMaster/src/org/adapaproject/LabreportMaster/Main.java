@@ -74,18 +74,19 @@ public class Main {
 						analyses.comparison(doc);
 						new CreateAnalysesDocument(doc, plagcheck);
 						
+						//TODO: inactivated during testing
 						//send email
-						try {
+/*						try {
 							new Email();
 							System.out.println("Email was sent.");
 						} catch (Exception e) {
 							System.err.println("Email was not sent, there was some problem.");
-						}
+						}*/
 						
 						//added to avoid saving testing data
 						String myEmail = CreateContentDocument.get_email();
 						
-						//todo: change back after testing
+						//TODO: change back after testing
 /*						if (!myEmail.equals("setarosd@wfu.edu")) {*/
 						if (myEmail.equals("setarosd@wfu.edu")) {
 							try {
@@ -100,6 +101,12 @@ public class Main {
 									dbInsert.insertLabreports();
 								} catch (Exception e) {
 									System.err.println("Labreport info was not saved in database.");
+									e.printStackTrace();
+								}
+								try {
+									dbInsert.insertStatistics();
+								} catch (Exception e) {
+									System.err.println("Statistics info was not saved in database.");
 									e.printStackTrace();
 								}
 							} catch (Exception e1) {
@@ -127,7 +134,8 @@ public class Main {
 											
 					}
 					
-					gate.addtoDatastore();
+					//TODO: inactivated during testing
+					//gate.addtoDatastore();
 					
 					Factory.deleteResource(corpus);
 					

@@ -5,12 +5,15 @@ package org.adapaproject.LabreportMaster.database.tables;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 import org.adapaproject.LabreportMaster.database.Database;
+import org.adapaproject.LabreportMaster.database.beans.Citation;
+import org.adapaproject.LabreportMaster.database.beans.Statistic;
 
 /**
  * @author setarosd
@@ -58,6 +61,28 @@ public class StatisticsManager {
 		}
 		
 		return list;
+	}
+	
+	public static boolean insert(Statistic bean) throws SQLException {
+		String sql = "INSERT into statistics (sentences, token, biology, citations, qualtrics_id) VALUES (?, ?, ?, ?, ?)";
+
+		try (
+				Connection connection = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
+				PreparedStatement statement = connection.prepareStatement(sql);
+				) {
+			
+			statement.setInt(1, bean.get_sentences());
+			statement.setInt(2, bean.get_token());
+			statement.setInt(3,  bean.get_biology());
+			statement.setInt(4, bean.get_citations());
+			statement.setString(5,  bean.get_qualtrics_id());
+			statement.executeUpdate();	
+			
+		} catch (SQLException e) {
+			System.err.println(e);
+			return false;
+		}
+		return true;
 	}
 	
 	private static ArrayList<Long> get_list(ResultSet result, String column) throws SQLException {

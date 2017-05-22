@@ -67,7 +67,7 @@ public class LabreportsManager {
 			statement.setInt(4, bean.get_course_id());
 			statement.setInt(5, bean.get_ta_id());
 			statement.setInt(6, bean.get_undergrad_id());
-			statement.executeUpdate();				
+			statement.executeUpdate();	
 			
 		} catch (SQLException e) {
 			System.err.println(e);

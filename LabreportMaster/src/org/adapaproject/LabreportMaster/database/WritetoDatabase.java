@@ -8,11 +8,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.adapaproject.LabreportMaster.analyses.CheckPlagiarism;
+import org.adapaproject.LabreportMaster.analyses.StatAnalyses;
 import org.adapaproject.LabreportMaster.database.beans.Citation;
 import org.adapaproject.LabreportMaster.database.beans.Labreport;
+import org.adapaproject.LabreportMaster.database.beans.Statistic;
 import org.adapaproject.LabreportMaster.database.tables.CitationsManager;
 import org.adapaproject.LabreportMaster.database.tables.CoursesManager;
 import org.adapaproject.LabreportMaster.database.tables.LabreportsManager;
+import org.adapaproject.LabreportMaster.database.tables.StatisticsManager;
 import org.adapaproject.LabreportMaster.database.tables.TeachingAssistantsManager;
 import org.adapaproject.LabreportMaster.database.tables.UndergraduatesManager;
 import org.adapaproject.LabreportMaster.document.CreateContentDocument;
@@ -47,7 +50,11 @@ public class WritetoDatabase {
 	private static String _course ;
 	private static String _email;
 	private static String _taEmail;
+	private static int _sentences;
+	private static int _token;
+	private static int _biology;
 	private static AnnotationSet _original;
+	private ArrayList<String> _citations;
 	
 	
 	public WritetoDatabase(Document doc) throws InvalidFormatException, IOException {
@@ -72,6 +79,11 @@ public class WritetoDatabase {
 		_course = CreateContentDocument.get_course();
 		_email = CreateContentDocument.get_email();
 		_taEmail = CreateContentDocument.get_tA_email();
+		_sentences = StatAnalyses.get_sentResult().length();
+		_token = StatAnalyses.get_tokenResult().length();
+		_biology = StatAnalyses.get_bioResult().length();
+		_citations = CheckPlagiarism.get_sanitizedCitations();
+		
 	}
 
 	public void insertLabreports() throws SQLException, PersistenceException, ResourceInstantiationException {
@@ -99,12 +111,10 @@ public class WritetoDatabase {
 
 	public void insertCitations() throws SQLException, PersistenceException, ResourceInstantiationException {
 				
-		ArrayList<String> citations = CheckPlagiarism.get_sanitizedCitations();
-				
-		for (int i = 0; i < citations.size(); i++) {
+		for (int i = 0; i < _citations.size(); i++) {
 			
-			System.out.println("citation size: " + citations.size());
-			String value = citations.get(i);
+			System.out.println("citation size: " + _citations.size());
+			String value = _citations.get(i);
 			
 			Citation bean = new Citation();
 			bean.set_citations_value(value);
@@ -115,6 +125,25 @@ public class WritetoDatabase {
 			if (result) {
 				System.out.println("New row in citations was inserted!");
 			}
+		}
+		
+	}
+	
+	//just copied so far need to change
+	public void insertStatistics() throws SQLException, PersistenceException, ResourceInstantiationException {
+										
+		Statistic bean = new Statistic();
+		bean.set_qualtrics_id(_id);
+		bean.set_sentences(_sentences);
+		bean.set_token(_token);
+		bean.set_biology(_biology);
+		bean.set_citations(_citations.size());
+		
+		
+		boolean result = StatisticsManager.insert(bean);
+		
+		if (result) {
+			System.out.println("New row in statistics was inserted!");
 		}
 		
 	}
