@@ -80,15 +80,9 @@ public class WritetoDatabase {
 		_email = CreateContentDocument.get_email();
 		_taEmail = CreateContentDocument.get_tA_email();
 		_sentences = doc.getAnnotations().get("Sentence").size();
-		System.out.println("sentences: " + _sentences);
 		_token = doc.getAnnotations().get("Token").size();
-		System.out.println("token: " + _token);
-
 		_biology = doc.getAnnotations().get("Biology").size();
-		System.out.println("biology: " + _biology);
-
 		_citations = CheckPlagiarism.get_sanitizedCitations();
-		System.out.println("citations: " + _citations);
 
 		
 	}
