@@ -118,8 +118,9 @@ public class Main {
 							log.error("this is bad");
 
 						}
+						//TODO: inactivated for testing only
 						
-						if (!myEmail.equals("setarosd@wfu.edu")) {
+/*						if (!myEmail.equals("setarosd@wfu.edu")) {
 							//add to Mimir
 							try {
 								gate.addtoMimir(doc, CreateContentDocument.get_id());
@@ -130,7 +131,7 @@ public class Main {
 							} 
 						} else {
 							System.out.println("Lab report is from Sabrina Setaro and was not saved to Mimir.");
-						}
+						}*/
 											
 					}
 					
