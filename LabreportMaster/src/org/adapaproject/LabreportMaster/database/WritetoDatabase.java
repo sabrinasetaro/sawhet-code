@@ -79,10 +79,17 @@ public class WritetoDatabase {
 		_course = CreateContentDocument.get_course();
 		_email = CreateContentDocument.get_email();
 		_taEmail = CreateContentDocument.get_tA_email();
-		_sentences = StatAnalyses.get_sentResult().length();
-		_token = StatAnalyses.get_tokenResult().length();
-		_biology = StatAnalyses.get_bioResult().length();
+		_sentences = doc.getAnnotations().get("Sentence").size();
+		System.out.println("sentences: " + _sentences);
+		_token = doc.getAnnotations().get("Token").size();
+		System.out.println("token: " + _token);
+
+		_biology = doc.getAnnotations().get("Biology").size();
+		System.out.println("biology: " + _biology);
+
 		_citations = CheckPlagiarism.get_sanitizedCitations();
+		System.out.println("citations: " + _citations);
+
 		
 	}
 

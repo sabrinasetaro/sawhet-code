@@ -68,7 +68,6 @@ public class StatAnalyses {
 		} else if (annotation.equals("Token")) {
 			_tokenResult = result;
 		}
-		
 		return result;
 	}
 	
