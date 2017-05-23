@@ -91,7 +91,7 @@ public class Main {
 						if (myEmail.equals("setarosd@wfu.edu")) {
 							try {
 								WritetoDatabase dbInsert = new WritetoDatabase(doc);
-/*								try {
+								try {
 									dbInsert.insertCitations();
 								} catch (Exception e) {
 									System.err.println("Citations were not saved in database.");
@@ -102,7 +102,7 @@ public class Main {
 								} catch (Exception e) {
 									System.err.println("Labreport info was not saved in database.");
 									e.printStackTrace();
-								}*/
+								}
 								try {
 									dbInsert.insertStatistics();
 								} catch (Exception e) {
