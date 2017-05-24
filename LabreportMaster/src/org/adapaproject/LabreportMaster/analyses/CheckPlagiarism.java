@@ -32,7 +32,7 @@ import gate.persist.PersistenceException;
 public class CheckPlagiarism {
 	
 	private AnnotationSet _annotCit;
-	private ArrayList _citationsDBMap;
+	//private ArrayList _citationsDBMap;
 	private Database _db;
 	private static ArrayList<String> _sanitizedCitations;
 	
@@ -42,7 +42,6 @@ public class CheckPlagiarism {
 			_db = new Database();
 		}
 		
-		//_sanitizedCitations = new ArrayList<String>();
 	}
 	
 	
@@ -94,24 +93,10 @@ public class CheckPlagiarism {
 		//get email
 		String email = stringFor(doc, doc.getAnnotations("Original markups").get("EmailAddress"));
 		//get all citation data
-		_citationsDBMap = CitationsManager.getCitationList(email);
+		ArrayList<String> idSame = CitationsManager.getCitationList(email);
 						
-		ArrayList<String> idSame = new ArrayList<String>();
 		
-		System.out.println("citationDMMapg: " + _citationsDBMap);
-		
-		//iterate over all citation data
-/*		Iterator iterCitations = ((Map) _citationsDBMap).entrySet().iterator();
-		System.out.println("number of cit: " + _citationsDBMap.size());
-		while(iterCitations.hasNext()) {
-			Map.Entry pair = (Map.Entry)iterCitations.next();
-			String value = (String) pair.getValue();
-			if (citationArray.contains(value)) {
-				idSame.add(pair.getKey().toString());
-			} 
-			
-		}*/
-		
+		//return idSame;
 		return idSame;
 		
 	}

@@ -85,7 +85,6 @@ public abstract class CitationsManager {
 			
 			if (citationArray.size()!=0) {
 				String sql = "Select ug.student_email, c.qualtrics_id, c.citations_value FROM undergraduates as ug JOIN labreports as lr on lr.undergrad_id = ug.id JOIN citations as c on c.qualtrics_id = lr.qualtrics_id where ug.student_email != 'setarosd@wfu.edu' and ug.student_email != 'sabrina.setaro@gmail.com' and c.citations_value not like 'Johnson 2015' and c.citations_value not like 'Johnson 2016' and c.citations_value not like 'Johnson 2017' and c.citations_value like ?";
-				ResultSet rs = null;
 				
 				try (
 						Connection connection = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
@@ -109,7 +108,6 @@ public abstract class CitationsManager {
 				
 				System.out.println("list size: " + list.size());
 				
-				//return list;
 			}
 			return list;
 						
@@ -118,7 +116,6 @@ public abstract class CitationsManager {
 		
 		private static ArrayList<String> get_list(ResultSet result, String email, ArrayList<String> list) throws SQLException {
 			
-			//ArrayList<String> list = new ArrayList<String>();
 			while (result.next()) {
 				//this avoids that earlier submissions of this student appear in list
 				if (result.getString("student_email").equals(email)) {
