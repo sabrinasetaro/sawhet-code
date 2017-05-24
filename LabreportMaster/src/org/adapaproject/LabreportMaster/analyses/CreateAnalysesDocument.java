@@ -27,6 +27,7 @@ public class CreateAnalysesDocument {
 		RunReadability readability = new RunReadability(doc);
 		StringBuffer plagResult = new StringBuffer();
 		plagResult = plag.printResult(doc);
+		System.out.println("plag: " + plagResult);
 		
 		string.append("Analysis ");
 		string.append("(based on " + StatAnalyses.get_dataSize() + " documents) ");

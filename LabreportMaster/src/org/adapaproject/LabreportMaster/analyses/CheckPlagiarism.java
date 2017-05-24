@@ -8,12 +8,12 @@ import static gate.Utils.stringFor;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 
 import org.adapaproject.LabreportMaster.database.Database;
 import org.adapaproject.LabreportMaster.database.tables.CitationsManager;
@@ -32,7 +32,7 @@ import gate.persist.PersistenceException;
 public class CheckPlagiarism {
 	
 	private AnnotationSet _annotCit;
-	private HashMap<String, String> _citationsDBMap;
+	private ArrayList _citationsDBMap;
 	private Database _db;
 	private static ArrayList<String> _sanitizedCitations;
 	
@@ -50,20 +50,25 @@ public class CheckPlagiarism {
 		StringBuffer resultText = new StringBuffer();
 		
 		ArrayList<String> sameIds = check(doc);
-		
+				
 		boolean preambleCheck = false;
 		
 		//create set to eliminate duplicates
 		Set<String> fishySet = new HashSet<String>();
-		
+				
 		//calculate how often id occurs in citations
 		for(String id : sameIds) {
+			System.out.println("id: " + id);
 			int totalCit = sameIds.size();
+			System.out.println("totalcit: " + totalCit);
 			double idsFreq = Collections.frequency(sameIds, id);
+			System.out.println("idsFreq: " + idsFreq);
 			double fraction = 100 * (idsFreq / totalCit);
+			System.out.println("fraction: " + fraction);
 			if(idsFreq >= 2 && fraction >= 50) {
 				fishySet.add(id);
 				preambleCheck = true;
+				System.out.println("check: " + preambleCheck);
 			}
 		}
 		
@@ -90,11 +95,14 @@ public class CheckPlagiarism {
 		String email = stringFor(doc, doc.getAnnotations("Original markups").get("EmailAddress"));
 		//get all citation data
 		_citationsDBMap = CitationsManager.getCitationList(email);
-				
+						
 		ArrayList<String> idSame = new ArrayList<String>();
 		
+		System.out.println("citationDMMapg: " + _citationsDBMap);
+		
 		//iterate over all citation data
-		Iterator iterCitations = _citationsDBMap.entrySet().iterator();
+/*		Iterator iterCitations = ((Map) _citationsDBMap).entrySet().iterator();
+		System.out.println("number of cit: " + _citationsDBMap.size());
 		while(iterCitations.hasNext()) {
 			Map.Entry pair = (Map.Entry)iterCitations.next();
 			String value = (String) pair.getValue();
@@ -102,7 +110,7 @@ public class CheckPlagiarism {
 				idSame.add(pair.getKey().toString());
 			} 
 			
-		}
+		}*/
 		
 		return idSame;
 		

@@ -9,16 +9,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashMap;
+import java.util.ArrayList;
 
+import org.adapaproject.LabreportMaster.analyses.CheckPlagiarism;
 import org.adapaproject.LabreportMaster.database.Database;
 import org.adapaproject.LabreportMaster.database.beans.Citation;
+
 
 /**
  * @author setarosd
  *
  */
-public class CitationsManager {
+public abstract class CitationsManager {
 	
 		private static final String USERNAME = Database.getUsername();
 		private static final String PASSWORD = Database.getPassword();
@@ -76,43 +78,55 @@ public class CitationsManager {
 			return true;
 		}
 		
-		public static HashMap<String, String> getCitationList(String email) throws SQLException {
+		public static ArrayList<String> getCitationList(String email) throws SQLException {
 			ResultSet result = null;
-			HashMap<String, String> map = null;
-			try (
-					Connection connection = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
-					Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-					) {						
-				
-				result = statement.executeQuery(
-						
-						"Select ug.student_email, c.qualtrics_id, c.citations_value FROM undergraduates as ug JOIN labreports as lr on lr.undergrad_id = ug.id JOIN citations as c on c.qualtrics_id = lr.qualtrics_id where ug.student_email != 'setarosd@wfu.edu' and ug.student_email != 'sabrina.setaro@gmail.com' and c.citations_value not like 'Johnson 2015' and c.citations_value not like 'Johnson 2016'"
-						
-						);
-				
-				map = get_list(result, email);
-				
-			} catch (SQLException e) {
-				System.err.println(e);
-			} finally {
-				if (result != null) {
-					result.close();
-				}
-			}
+			ArrayList<String> list = new ArrayList<String>();
+			ArrayList<String> citationArray = CheckPlagiarism.get_sanitizedCitations();
 			
-			return map;
+			if (citationArray.size()!=0) {
+				String sql = "Select ug.student_email, c.qualtrics_id, c.citations_value FROM undergraduates as ug JOIN labreports as lr on lr.undergrad_id = ug.id JOIN citations as c on c.qualtrics_id = lr.qualtrics_id where ug.student_email != 'setarosd@wfu.edu' and ug.student_email != 'sabrina.setaro@gmail.com' and c.citations_value not like 'Johnson 2015' and c.citations_value not like 'Johnson 2016' and c.citations_value not like 'Johnson 2017' and c.citations_value like ?";
+				ResultSet rs = null;
+				
+				try (
+						Connection connection = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
+						PreparedStatement statement = connection.prepareStatement(sql);
+						) {					
+					
+					for (int i = 0; i < citationArray.size(); i++) {
+						statement.setString(1, citationArray.get(i));
+						result = statement.executeQuery();
+						list = get_list(result, email, list);
+					}
+					
+					
+				} catch (SQLException e) {
+					System.err.println(e);
+				} finally {
+					if (result != null) {
+						result.close();
+					}
+				}
+				
+				System.out.println("list size: " + list.size());
+				
+				//return list;
+			}
+			return list;
+						
+
 		}
 		
-		private static HashMap<String, String> get_list(ResultSet result, String email) throws SQLException {
+		private static ArrayList<String> get_list(ResultSet result, String email, ArrayList<String> list) throws SQLException {
 			
-			HashMap<String, String> map = new HashMap<String, String>();
+			//ArrayList<String> list = new ArrayList<String>();
 			while (result.next()) {
 				//this avoids that earlier submissions of this student appear in list
 				if (result.getString("student_email").equals(email)) {
 				} else {
-					map.put(result.getString("qualtrics_id"), result.getString("citations_value"));
+					list.add(result.getString("qualtrics_id"));
 				}
 			}
-			return map;
+			
+			return list;
 		}
 }
