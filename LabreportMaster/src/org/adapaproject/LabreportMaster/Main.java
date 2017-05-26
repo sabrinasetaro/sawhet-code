@@ -64,15 +64,15 @@ public class Main {
 						
 						Document doc = corpus.get(i);
 						//save .txt and .doc files
-						CreateContentDocument content = new CreateContentDocument(doc);
+						//CreateContentDocument content = new CreateContentDocument(doc);
 						//TODO: for bug fixing
 						//content.getInfoDatabase();
 						
-						content.printLabreport();
+						//content.printLabreport();
 						
 						//save analysis file
-						analyses.comparison(doc);
-						new CreateAnalysesDocument(doc, plagcheck);
+						//analyses.comparison(doc);
+						//new CreateAnalysesDocument(doc, plagcheck);
 						
 						//TODO: inactivated during testing
 						//send email
@@ -84,7 +84,7 @@ public class Main {
 						}*/
 						
 						//added to avoid saving testing data
-						String myEmail = CreateContentDocument.get_email();
+						//String myEmail = CreateContentDocument.get_email();
 						
 						//TODO: change back after testing
 						//if (!myEmail.equals("setarosd@wfu.edu")) {
