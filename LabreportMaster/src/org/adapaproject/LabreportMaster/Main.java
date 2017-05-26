@@ -88,7 +88,7 @@ public class Main {
 						
 						//TODO: change back after testing
 						//if (!myEmail.equals("setarosd@wfu.edu")) {
-						if (myEmail.equals("setarosd@wfu.edu")) {
+/*						if (myEmail.equals("setarosd@wfu.edu")) {
 							try {
 								WritetoDatabase dbInsert = new WritetoDatabase(doc);
 								try {
@@ -117,7 +117,7 @@ public class Main {
 							System.out.println("Lab report is from Sabrina Setaro and was not saved in database.");
 							log.error("this is bad");
 
-						}
+						}*/
 						//TODO: inactivated for testing only
 						
 /*						if (!myEmail.equals("setarosd@wfu.edu")) {
