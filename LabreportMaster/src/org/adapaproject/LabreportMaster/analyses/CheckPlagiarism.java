@@ -9,11 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-
 
 import org.adapaproject.LabreportMaster.database.Database;
 import org.adapaproject.LabreportMaster.database.tables.CitationsManager;
@@ -49,6 +46,8 @@ public class CheckPlagiarism {
 		StringBuffer resultText = new StringBuffer();
 		
 		ArrayList<String> sameIds = check(doc);
+		
+		Set<String> unique = new HashSet<String>(sameIds);
 				
 		boolean preambleCheck = false;
 		
@@ -56,7 +55,7 @@ public class CheckPlagiarism {
 		Set<String> fishySet = new HashSet<String>();
 				
 		//calculate how often id occurs in citations
-		for(String id : sameIds) {
+		for(String id : unique) {
 			System.out.println("id: " + id);
 			int totalCit = sameIds.size();
 			System.out.println("totalcit: " + totalCit);
