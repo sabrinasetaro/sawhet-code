@@ -58,7 +58,7 @@ public class RunGate {
 		loadController();
 		createSmallCorpus();
 		execute();
-		checkforLastID();
+		//checkforLastID();
 	}
 	
 	public void runAll() throws PersistenceException, ResourceInstantiationException {
@@ -80,9 +80,11 @@ public class RunGate {
 						+ _surveyID + "&LastResponseID=" + _lastLabreportID);*/
 		
 		//use this when using a new survey
-		qualtrics = new URL(
+/*		qualtrics = new URL(
 				"https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID="
-						+ _surveyID);
+						+ _surveyID);*/
+		
+		qualtrics = new File("1.xml").toURI().toURL();
 
 		//check for 400 error to see if lastId is present or not
 /*		if(checkfor400Error(qualtrics) == true) {
