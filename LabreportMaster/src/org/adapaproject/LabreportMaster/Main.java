@@ -136,7 +136,7 @@ public class Main {
 					}
 					
 					//TODO: inactivated during testing
-					//gate.addtoDatastore();
+					gate.addtoDatastore();
 					
 					Factory.deleteResource(corpus);
 					
