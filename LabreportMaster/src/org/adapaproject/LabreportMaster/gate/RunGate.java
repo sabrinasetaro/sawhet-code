@@ -39,8 +39,8 @@ import gate.util.persistence.PersistenceManager;
 public class RunGate {
 	
 	private CorpusController _controller;
-	private static String _home = "/home/setarosd/git";
-	//private static String _home = "/usr/share/sawhet";
+	//private static String _home = "/home/setarosd/git";
+	private static String _home = "/usr/share/sawhet";
 
 	private Corpus _corpus;
 	private Corpus _corpusAll;
@@ -84,7 +84,9 @@ public class RunGate {
 				"https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID="
 						+ _surveyID);*/
 		
-		qualtrics = new File("1.xml").toURI().toURL();
+		qualtrics = new File("/usr/share/sawhet/1.xml").toURI().toURL();
+		
+		System.out.println("url: " + qualtrics);
 
 		//check for 400 error to see if lastId is present or not
 /*		if(checkfor400Error(qualtrics) == true) {
