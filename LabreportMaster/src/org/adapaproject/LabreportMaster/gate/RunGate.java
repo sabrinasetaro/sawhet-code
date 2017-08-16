@@ -93,12 +93,13 @@ public class RunGate {
 		System.out.println("url: " + qualtrics);
 
 		//check for 400 error to see if lastId is present or not
-/*		if(checkfor400Error(qualtrics) == true) {
+		if(checkfor400Error(qualtrics) == true) {
 			System.err.println("Change to other url to download all data in survey.");
 			qualtrics = new URL(
 					"https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID="
 							+ _surveyID);
-		}*/
+		}
+		
 		//populate corpus
 		try {
 			gate.corpora.CorpusImpl.populate(_corpus, qualtrics, "Response", "utf-8", 0, "LabReport", "text/xml", true);
@@ -247,10 +248,7 @@ public class RunGate {
 			ds.sync(dsCorpus);
 			String datastoreId = _corpus.get(i).getLRPersistenceId().toString();
 			_datastoreIds.add(datastoreId);
-			//System.out.println("hey, I exist: " + _datastoreIds.size());
 		}
-
-		//ds.sync(dsCorpus);
 		
 		System.out.println("Size of corpus in datastore is now: " + dsCorpus.size());
 		Factory.deleteResource(dsCorpus);
