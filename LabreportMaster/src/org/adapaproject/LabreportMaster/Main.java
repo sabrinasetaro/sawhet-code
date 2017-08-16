@@ -4,6 +4,7 @@
 package org.adapaproject.LabreportMaster;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.adapaproject.LabreportMaster.analyses.CheckPlagiarism;
 import org.adapaproject.LabreportMaster.analyses.StatAnalyses;
@@ -55,6 +56,8 @@ public class Main {
 					
 					Corpus corpus = gate.get_corpus();
 					
+					//store in datastore
+					gate.addtoDatastore();
 					//Load data from all data once, before iterating through all documents
 					StatAnalyses analyses = new StatAnalyses();
 					analyses.initiate();
@@ -62,35 +65,41 @@ public class Main {
 										
 					for (int i = 0; i < corpus.size(); i++) {
 						
+						//String datastoreId = RunGate.get_datastoreIds().get(i);
+						//System.out.println("datastore id: " + datastoreId);
+						ArrayList<String> datastoreIds = gate.get_datastoreIds();
+						
+						String datastoreId = datastoreIds.get(i);
+						
 						Document doc = corpus.get(i);
 						//save .txt and .doc files
-						//CreateContentDocument content = new CreateContentDocument(doc);
+						CreateContentDocument content = new CreateContentDocument(doc);
 						//TODO: for bug fixing
-						//content.getInfoDatabase();
+						content.getInfoDatabase();
 						
-						//content.printLabreport();
+						content.printLabreport();
 						
 						//save analysis file
-						//analyses.comparison(doc);
-						//new CreateAnalysesDocument(doc, plagcheck);
+						analyses.comparison(doc);
+						new CreateAnalysesDocument(doc, plagcheck);
 						
 						//TODO: inactivated during testing
 						//send email
-/*						try {
+						try {
 							new Email();
 							System.out.println("Email was sent.");
 						} catch (Exception e) {
 							System.err.println("Email was not sent, there was some problem.");
-						}*/
+						}
 						
 						//added to avoid saving testing data
-						//String myEmail = CreateContentDocument.get_email();
+						String myEmail = CreateContentDocument.get_email();
 						
 						//TODO: change back after testing
 						//if (!myEmail.equals("setarosd@wfu.edu")) {
-/*						if (myEmail.equals("setarosd@wfu.edu")) {
+						if (myEmail.equals("setarosd@wfu.edu")) {
 							try {
-								WritetoDatabase dbInsert = new WritetoDatabase(doc);
+								WritetoDatabase dbInsert = new WritetoDatabase(doc, datastoreId);
 								try {
 									dbInsert.insertCitations();
 								} catch (Exception e) {
@@ -117,10 +126,10 @@ public class Main {
 							System.out.println("Lab report is from Sabrina Setaro and was not saved in database.");
 							log.error("this is bad");
 
-						}*/
+						}
 						//TODO: inactivated for testing only
 						
-/*						if (!myEmail.equals("setarosd@wfu.edu")) {
+						if (!myEmail.equals("setarosd@wfu.edu")) {
 							//add to Mimir
 							try {
 								gate.addtoMimir(doc, CreateContentDocument.get_id());
@@ -131,12 +140,9 @@ public class Main {
 							} 
 						} else {
 							System.out.println("Lab report is from Sabrina Setaro and was not saved to Mimir.");
-						}*/
+						}
 											
 					}
-					
-					//TODO: inactivated during testing
-					gate.addtoDatastore();
 					
 					Factory.deleteResource(corpus);
 					

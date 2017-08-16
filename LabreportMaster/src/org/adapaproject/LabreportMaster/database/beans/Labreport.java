@@ -11,11 +11,13 @@ public class Labreport {
 	
 	private int _labreport_id;
 	private String _qualtrics_id;
+	private String _datastore_id;
 	private String _number;
 	private String _date;
 	private int _course_id;
 	private int _ta_id;
 	private int _undergrad_id;
+	
 	public int get_labreport_id() {
 		return _labreport_id;
 	}
@@ -34,6 +36,13 @@ public class Labreport {
 	public void set_number(String _number) {
 		this._number = _number;
 	}
+	public String get_datastore_id() {
+		return _datastore_id;
+	}
+	public void set_datastore_id(String _datastore_id) {
+		this._datastore_id = _datastore_id;
+	}
+	
 	public String get_date() {
 		return _date;
 	}

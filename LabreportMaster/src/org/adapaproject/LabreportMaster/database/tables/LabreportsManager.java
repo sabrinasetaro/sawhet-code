@@ -54,7 +54,7 @@ public class LabreportsManager {
 	}
 	
 	public static boolean insert(Labreport bean) throws SQLException {
-		String sql = "INSERT into labreports (qualtrics_id, number, date, course_id, ta_id, undergrad_id) VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT into labreports (qualtrics_id, datastore_id, number, date, course_id, ta_id, undergrad_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		try (
 				Connection connection = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
@@ -62,11 +62,12 @@ public class LabreportsManager {
 				) {
 			
 			statement.setString(1, bean.get_qualtrics_id());
-			statement.setString(2, bean.get_number());
-			statement.setString(3, bean.get_date());
-			statement.setInt(4, bean.get_course_id());
-			statement.setInt(5, bean.get_ta_id());
-			statement.setInt(6, bean.get_undergrad_id());
+			statement.setString(2, bean.get_datastore_id());
+			statement.setString(3, bean.get_number());
+			statement.setString(4, bean.get_date());
+			statement.setInt(5, bean.get_course_id());
+			statement.setInt(6, bean.get_ta_id());
+			statement.setInt(7, bean.get_undergrad_id());
 			statement.executeUpdate();	
 			
 		} catch (SQLException e) {

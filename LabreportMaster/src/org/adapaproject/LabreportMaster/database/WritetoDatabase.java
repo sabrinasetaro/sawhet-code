@@ -19,6 +19,7 @@ import org.adapaproject.LabreportMaster.database.tables.StatisticsManager;
 import org.adapaproject.LabreportMaster.database.tables.TeachingAssistantsManager;
 import org.adapaproject.LabreportMaster.database.tables.UndergraduatesManager;
 import org.adapaproject.LabreportMaster.document.CreateContentDocument;
+import org.adapaproject.LabreportMaster.gate.RunGate;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import gate.Document;
@@ -35,15 +36,6 @@ import static gate.Utils.stringFor;
  */
 public class WritetoDatabase {
 	
-	
-	
-/*	private static String _id = CreateContentDocument.get_id();
-	private static String _date = CreateContentDocument.get_date();
-	private static String _number = CreateContentDocument.get_number();
-	private static String _course = CreateContentDocument.get_course();
-	private static String _email = CreateContentDocument.get_email();
-	private static String _taEmail = CreateContentDocument.get_tA_email();*/
-	
 	private static String _id;
 	private static String _date;
 	private static String _number;
@@ -55,21 +47,12 @@ public class WritetoDatabase {
 	private static int _biology;
 	private static AnnotationSet _original;
 	private ArrayList<String> _citations;
+	private static String _datastoreID;
 	
 	
-	public WritetoDatabase(Document doc) throws InvalidFormatException, IOException {
+	public WritetoDatabase(Document doc, String datastoreId) throws InvalidFormatException, IOException {
 		
 		CreateContentDocument create = new CreateContentDocument(doc);
-		
-/*		_original = doc.getAnnotations("Original markups");
-		_id = stringFor(doc, _original.get("ResponseID"));
-		//TODO: for testing
-		System.out.println("ID_now: " + _id);
-		_email = stringFor(doc, _original.get("EmailAddress"));
-		//_name = stringFor(doc, _original.get("Name"));
-		_date = stringFor(doc, _original.get("EndDate"));
-		_number = (String) stringFor(doc, _original.get("QID17"));
-		_course = create.checkCourse();*/
 		
 		_id = CreateContentDocument.get_id();
 		System.out.println("ID in WritetoDatabase: " + _id);
@@ -83,6 +66,8 @@ public class WritetoDatabase {
 		_token = doc.getAnnotations().get("Token").size();
 		_biology = doc.getAnnotations().get("Biology").size();
 		_citations = CheckPlagiarism.get_sanitizedCitations();
+		_datastoreID = datastoreId;
+		System.out.println("Datastore Id in WritetoDatabase: " + _datastoreID);
 
 		
 	}
@@ -95,6 +80,7 @@ public class WritetoDatabase {
 								
 		Labreport bean = new Labreport();
 		bean.set_qualtrics_id(_id);
+		bean.set_datastore_id(_datastoreID);
 		bean.set_number(_number);
 		bean.set_date(_date);
 		bean.set_course_id(course_id);

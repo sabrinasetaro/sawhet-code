@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -39,8 +40,8 @@ import gate.util.persistence.PersistenceManager;
 public class RunGate {
 	
 	private CorpusController _controller;
-	//private static String _home = "/home/setarosd/git";
-	private static String _home = "/usr/share/sawhet";
+	private static String _home = "/home/setarosd/git";
+	//private static String _home = "/usr/share/sawhet";
 
 	private Corpus _corpus;
 	private Corpus _corpusAll;
@@ -48,7 +49,8 @@ public class RunGate {
 	private String _lastLabreportID;
 	private String _dsCorpusName;
 	private static DataStore _ds;
-	
+	private ArrayList<String> _datastoreIds = new ArrayList<String>();
+
 	public void run(String surveyID, String dsCorpusName, String lastLabreportID) throws GateException, IOException {
 		_surveyID = surveyID;
 		_lastLabreportID = lastLabreportID;
@@ -80,11 +82,12 @@ public class RunGate {
 						+ _surveyID + "&LastResponseID=" + _lastLabreportID);*/
 		
 		//use this when using a new survey
-/*		qualtrics = new URL(
+		qualtrics = new URL(
 				"https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID="
-						+ _surveyID);*/
+						+ _surveyID);
 		
-		qualtrics = new File("/usr/share/sawhet/1.xml").toURI().toURL();
+		//use this when adding lab reports from local xml file
+		//qualtrics = new File("/home/setarosd/Desktop/missing.xml").toURI().toURL();
 		
 		System.out.println("url: " + qualtrics);
 
@@ -236,15 +239,21 @@ public class RunGate {
 		dsCorpus = (Corpus) Factory.createResource("gate.corpora.SerialCorpusImpl", features);
 		System.out.println("Size of corpus in datastore: " + dsCorpus.size());
 		
+		
 		//add new documents to datastore corpus; uncomment this, if you need to stop adding new documents to database
 		for (int i = 0; i < _corpus.size(); i++) {
 			dsCorpus.add(_corpus.get(i));
+			ds.sync(dsCorpus);
+			String datastoreId = _corpus.get(i).getLRPersistenceId().toString();
+			_datastoreIds.add(datastoreId);
+			//System.out.println("hey, I exist: " + _datastoreIds.size());
 		}
 
-		ds.sync(dsCorpus);
+		//ds.sync(dsCorpus);
+		
 		System.out.println("Size of corpus in datastore is now: " + dsCorpus.size());
 		Factory.deleteResource(dsCorpus);
-		ds.close();
+		//ds.close();
 		
 	}
 	
@@ -274,4 +283,7 @@ public class RunGate {
 		return _home;
 	}
 
+	public ArrayList<String> get_datastoreIds() {
+		return _datastoreIds;
+	}
 }
