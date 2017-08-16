@@ -93,12 +93,12 @@ public class RunGate {
 		System.out.println("url: " + qualtrics);
 
 		//check for 400 error to see if lastId is present or not
-		if(checkfor400Error(qualtrics) == true) {
+/*		if(checkfor400Error(qualtrics) == true) {
 			System.err.println("Change to other url to download all data in survey.");
 			qualtrics = new URL(
 					"https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID="
 							+ _surveyID);
-		}
+		}*/
 		
 		//populate corpus
 		try {
