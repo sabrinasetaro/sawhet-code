@@ -65,8 +65,6 @@ public class Main {
 										
 					for (int i = 0; i < corpus.size(); i++) {
 						
-						//String datastoreId = RunGate.get_datastoreIds().get(i);
-						//System.out.println("datastore id: " + datastoreId);
 						ArrayList<String> datastoreIds = gate.get_datastoreIds();
 						
 						String datastoreId = datastoreIds.get(i);
@@ -74,7 +72,7 @@ public class Main {
 						Document doc = corpus.get(i);
 						//save .txt and .doc files
 						CreateContentDocument content = new CreateContentDocument(doc);
-						//TODO: for bug fixing
+
 						content.getInfoDatabase();
 						
 						content.printLabreport();
@@ -83,7 +81,6 @@ public class Main {
 						analyses.comparison(doc);
 						new CreateAnalysesDocument(doc, plagcheck);
 						
-						//TODO: inactivated during testing
 						//send email
 						try {
 							new Email();
@@ -127,7 +124,6 @@ public class Main {
 							log.error("this is bad");
 
 						}
-						//TODO: inactivated for testing only
 						
 						if (!myEmail.equals("setarosd@wfu.edu")) {
 							//add to Mimir

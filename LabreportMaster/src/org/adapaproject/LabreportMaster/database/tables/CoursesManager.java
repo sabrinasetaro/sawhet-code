@@ -38,8 +38,6 @@ public class CoursesManager {
 				Course bean = new Course();
 				bean.set_name(courseName);
 				int course_id = rs.getInt("course_id");
-				//bean.set_course_id(rs.getInt("course_id"));
-				//System.out.println("bean: " + bean.get_course_id());
 				return course_id;
 			} else {
 				return (Integer) null;

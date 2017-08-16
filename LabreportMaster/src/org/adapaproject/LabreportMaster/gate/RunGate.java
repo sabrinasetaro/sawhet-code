@@ -60,6 +60,7 @@ public class RunGate {
 		loadController();
 		createSmallCorpus();
 		execute();
+		//TODO: inactivated for testing
 		//checkforLastID();
 	}
 	
@@ -111,7 +112,7 @@ public class RunGate {
 		}
 	}
 	
-		//this shall make sure that lab report executions are not repeated on lab reports that have been already processed.
+	//this shall make sure that lab report executions are not repeated on lab reports that have been already processed.
 	private void checkforLastID() {
 		
 		for (int i = 0; i < _corpus.size(); i++) {

@@ -45,7 +45,7 @@ public class WriteToFile {
 				case DOCUMENT:
 					directory.append("labreport/");
 					directory.append(id);
-					//need this to attache file from correct directory later
+					//need this to attach file from correct directory later
 					directory.append("_text");
 					_textDirectory = directory.toString();
 					directory.append(".txt");

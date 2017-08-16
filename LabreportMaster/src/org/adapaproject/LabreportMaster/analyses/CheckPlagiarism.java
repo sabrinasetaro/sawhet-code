@@ -29,7 +29,6 @@ import gate.persist.PersistenceException;
 public class CheckPlagiarism {
 	
 	private AnnotationSet _annotCit;
-	//private ArrayList _citationsDBMap;
 	private Database _db;
 	private static ArrayList<String> _sanitizedCitations;
 	
