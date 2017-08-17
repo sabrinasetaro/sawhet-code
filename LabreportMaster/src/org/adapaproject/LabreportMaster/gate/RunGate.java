@@ -48,8 +48,9 @@ public class RunGate {
 	private String _surveyID;
 	private String _lastLabreportID;
 	private String _dsCorpusName;
-	private static DataStore _ds;
+	private static DataStore _ds2;
 	private ArrayList<String> _datastoreIds = new ArrayList<String>();
+	private static DataStore _ds;
 
 	public void run(String surveyID, String dsCorpusName, String lastLabreportID) throws GateException, IOException {
 		_surveyID = surveyID;
@@ -140,17 +141,17 @@ public class RunGate {
 	}
 	
 	private void createCorpusAll() throws PersistenceException, ResourceInstantiationException {
-		_ds = this.getDatastore("file:" + _home + "/gate/datastoreLabreports");
+		_ds2 = this.getDatastore("file:" + _home + "/gate/datastoreLabreports");
 
 		_corpusAll = Factory.newCorpus("corpusAll");
 		
-		Integer corpora = _ds.getLrIds("gate.corpora.SerialCorpusImpl").size();
+		Integer corpora = _ds2.getLrIds("gate.corpora.SerialCorpusImpl").size();
 		
 		for (int i = 0; i < corpora; i++) {
-			Object corpusName = _ds.getLrIds("gate.corpora.SerialCorpusImpl").get(i);
+			Object corpusName = _ds2.getLrIds("gate.corpora.SerialCorpusImpl").get(i);
 			FeatureMap features = Factory.newFeatureMap();
 			features.put(DataStore.LR_ID_FEATURE_NAME, corpusName);
-			features.put(DataStore.DATASTORE_FEATURE_NAME, _ds);
+			features.put(DataStore.DATASTORE_FEATURE_NAME, _ds2);
 			_corpus = (Corpus) Factory.createResource("gate.corpora.SerialCorpusImpl", features);
 			for (int j = 0; j < _corpus.size(); j++) {
 				Document doc = _corpus.get(j);
@@ -170,12 +171,14 @@ public class RunGate {
 		}
 		
 		System.out.println("Corpus with " + _corpusAll.size() + " labreports loaded.");
+		_ds2.close();
+		System.out.println("datastore closed");
 	}
 	
 	private DataStore getDatastore(String datastore) throws PersistenceException {
 		
-		_ds = Factory.openDataStore("gate.persist.LuceneDataStoreImpl", datastore);
-		return _ds;
+		_ds2 = Factory.openDataStore("gate.persist.LuceneDataStoreImpl", datastore);
+		return _ds2;
 	}
 
 	/**
@@ -228,11 +231,11 @@ public class RunGate {
 	
 	public void addtoDatastore() throws PersistenceException, ResourceInstantiationException {
 		
-		DataStore ds = Factory.openDataStore("gate.persist.LuceneDataStoreImpl", "file:" + _home + "/gate/datastoreLabreports");
+		_ds = Factory.openDataStore("gate.persist.LuceneDataStoreImpl", "file:" + _home + "/gate/datastoreLabreports");
 		//create a feature map to create corpus from datastore
 		FeatureMap features = Factory.newFeatureMap();
 		features.put(DataStore.LR_ID_FEATURE_NAME, _dsCorpusName);
-		features.put(DataStore.DATASTORE_FEATURE_NAME, ds);
+		features.put(DataStore.DATASTORE_FEATURE_NAME, _ds);
 		
 		//create corpus from datastore
 		Corpus dsCorpus = null;
@@ -244,14 +247,13 @@ public class RunGate {
 		//add new documents to datastore corpus; uncomment this, if you need to stop adding new documents to database
 		for (int i = 0; i < _corpus.size(); i++) {
 			dsCorpus.add(_corpus.get(i));
-			ds.sync(dsCorpus);
+			_ds.sync(dsCorpus);
 			String datastoreId = _corpus.get(i).getLRPersistenceId().toString();
 			_datastoreIds.add(datastoreId);
 		}
 		
 		System.out.println("Size of corpus in datastore is now: " + dsCorpus.size());
 		Factory.deleteResource(dsCorpus);
-		//ds.close();
 		
 	}
 	
@@ -283,5 +285,9 @@ public class RunGate {
 
 	public ArrayList<String> get_datastoreIds() {
 		return _datastoreIds;
+	}
+
+	public static DataStore get_ds() {
+		return _ds;
 	}
 }

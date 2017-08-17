@@ -141,6 +141,8 @@ public class Main {
 					}
 					
 					Factory.deleteResource(corpus);
+										
+					gate.get_ds().close();
 					
 					timeCalculator(startTime);
 				}
