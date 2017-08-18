@@ -81,10 +81,10 @@ public class CreateContentDocument {
 		
 		try {
 			String type = stringFor(_doc, _original.get("QID90"));
-			if (type.equals("normal")) {
-				text.append("This is a regular lab report.\n");
-			} else if (type.equals("rewrite")) {
-				text.append("This is a rewrite of a previous lab report.\n");
+			if (type.equals("submission")) {
+				text.append("This is a lab report.\n");
+			} else if (type.equals("revision")) {
+				text.append("This is a revision of a previous lab report.\n");
 			}
 		} catch (Exception e) {
 			//do nothing
