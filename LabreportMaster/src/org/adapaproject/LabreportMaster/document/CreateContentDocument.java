@@ -356,18 +356,18 @@ public class CreateContentDocument {
 
 	public String checkTA() {
 		String tA = null;
-		if (stringFor(_doc, _original.get("TA2_Name")).isEmpty()) {
-			tA = stringFor(_doc, _original.get("TA1_Name"));
-			_taEmail = stringFor(_doc, _original.get("TA1_Email"));
+		if (stringFor(_doc, _original.get("TA2Name")).isEmpty()) {
+			tA = stringFor(_doc, _original.get("TA1Name"));
+			_taEmail = stringFor(_doc, _original.get("TA1Email"));
 
 		} else {
 			if (_course.equals(stringFor(_doc, _original.get("Course1")))) {
-				tA = stringFor(_doc, _original.get("TA1_Name"));
-				_taEmail = stringFor(_doc, _original.get("TA1_Email"));
+				tA = stringFor(_doc, _original.get("TA1Name"));
+				_taEmail = stringFor(_doc, _original.get("TA1Email"));
 
 			} else if (_course.equals(stringFor(_doc, _original.get("Course2")))) {
-				tA = stringFor(_doc, _original.get("TA2_Name"));
-				_taEmail = stringFor(_doc, _original.get("TA2_Email"));
+				tA = stringFor(_doc, _original.get("TA2Name"));
+				_taEmail = stringFor(_doc, _original.get("TA2Email"));
 			}
 		} 
 		return tA;
