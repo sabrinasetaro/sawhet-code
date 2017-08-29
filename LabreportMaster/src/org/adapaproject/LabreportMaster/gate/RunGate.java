@@ -53,6 +53,8 @@ public class RunGate {
 	private static DataStore _ds;
 
 	public void run(String surveyID, String dsCorpusName, String lastLabreportID) throws GateException, IOException {
+		
+		System.out.println("I'm here");
 		_surveyID = surveyID;
 		_lastLabreportID = lastLabreportID;
 		_dsCorpusName = dsCorpusName;

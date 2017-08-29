@@ -7,6 +7,8 @@ import static gate.Utils.stringFor;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
@@ -32,12 +34,24 @@ public class CreateContentDocument {
 	private static String _number;
 
 	public CreateContentDocument(Document doc) throws IOException, InvalidFormatException {
+		
+		//private static Logger log = Logger.getLogger(Main.class);
+		Logger log = Logger.getLogger("LabreportMaster");
+		
 		_doc = doc;
 		_original = _doc.getAnnotations("Original markups");
 		_results = _doc.getAnnotations();
-		_course = this.checkCourse();
-		_tA = this.checkTA();
 		_id = stringFor(_doc, _original.get("ResponseID"));
+		try {
+			_course = this.checkCourse();
+		} catch (Exception e) {
+			log.log(Level.SEVERE, "Error with course information for " + _id + ".", e);
+		}
+		try {
+			_tA = this.checkTA();
+		} catch (Exception e) {
+			log.log(Level.SEVERE, "Error with TA information for " + _id + ".", e);
+		}
 		_email = stringFor(_doc, _original.get("EmailAddress"));
 		_name = stringFor(_doc, _original.get("Name"));
 		_date = stringFor(_doc, _original.get("EndDate"));
@@ -368,7 +382,8 @@ public class CreateContentDocument {
 			} else if (_course.equals(stringFor(_doc, _original.get("Course2")))) {
 				tA = stringFor(_doc, _original.get("TA2Name"));
 				_taEmail = stringFor(_doc, _original.get("TA2Email"));
-			}
+			} 
+			
 		} 
 		return tA;
 		
