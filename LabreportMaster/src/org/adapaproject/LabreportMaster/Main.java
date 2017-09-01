@@ -44,8 +44,6 @@ public class Main {
 	 */
 	public static void main(String[] args) throws GateException, IOException {
 		
-		System.out.println("I'm in main");
-		
 		FileHandler handler = null;
 		try {
 			handler = new FileHandler("LabreportLog.xml");
