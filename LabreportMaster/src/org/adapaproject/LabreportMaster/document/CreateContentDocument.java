@@ -201,90 +201,34 @@ public class CreateContentDocument {
 		worddoc.addContentWORD("\n", false);
 		
 		//create array of tables and graphs
-		String[] tableList = {"QID85", "QID84", "QID83", "QID82", "QID75"};
-		
-		//loop over tables and graphs and print link
-		for (int i = 0; i < tableList.length; i++) {
-			int tableNo = i + 1;
-			
-			//if it is not a joint table and entry for table is not empty:
-			if (i != 4 && !stringFor(_doc, _original.get(tableList[i])).isEmpty()){
-				text.append("\nTable ");
-				text.append(tableNo + ": ");
-				text.append(stringFor(_doc, _original.get(tableList[i])));
-				text.append("\n");
-
-				image.getImage(stringFor(_doc, _original.get(tableList[i])));
-				
-				//add header
-				worddoc.addContentWORD("Table: " + tableNo, false);
-				//add image
-				worddoc.importImage();
-				
-			//if it is a joint table and entry for table is not empty:
-			} else if (i == 4 && !stringFor(_doc, _original.get(tableList[i])).isEmpty()){
-				text.append("\nJoint table file: ");
-				text.append(stringFor(_doc, _original.get(tableList[i])));
-				text.append("\n");
-				
-				image.getImage(stringFor(_doc, _original.get(tableList[i])));
-				//add header
-				worddoc.addContentWORD("Table: " + tableNo, false);
-				
-				//add image
-				worddoc.importImage();
-				
-			} else {
-				text.append("\nTable ");
-				text.append(tableNo);
-				text.append(": no files uploaded\n");
-			}
-		}
-		
-		//create array of figures
-		String[] figureList = {"QID89", "QID88", "QID87", "QID86", "QID80"};
-		
+		String[] figureList = {"QID85", "QID84", "QID83", "QID82", "QID89", "QID88", "QID87", "QID86"};
 		
 		//loop over figures and print link
 		for (int i = 0; i < figureList.length; i++) {
 			int figureNo = i + 1;
 			
-			//if it is not a joint figure and entry for figure is not empty:
-			if (i != 4 && !stringFor(_doc, _original.get(figureList[i])).isEmpty()){
+			//if it is not empty:
+			if (!stringFor(_doc, _original.get(figureList[i])).isEmpty()){
 				text.append("\nFigure ");
 				text.append(figureNo + ": ");
 				text.append(stringFor(_doc, _original.get(figureList[i])));
 				text.append("\n");
-				
+
 				image.getImage(stringFor(_doc, _original.get(figureList[i])));
 				
 				//add header
 				worddoc.addContentWORD("Figure: " + figureNo, false);
-				
 				//add image
 				worddoc.importImage();
 				
-			//if it is a joint figure and entry for figure is not empty:
-			} else if (i == 4 && !stringFor(_doc, _original.get(figureList[i])).isEmpty()){
-				text.append("\nJoint figure file: ");
-				text.append(stringFor(_doc, _original.get(figureList[i])));
-				text.append("\n");
-				
-				image.getImage(stringFor(_doc, _original.get(figureList[i])));
-				
-				//add header
-				worddoc.addContentWORD("Figure: " + figureNo, false);
-				
-				//add image
-				worddoc.importImage();
-				
+			//if figure is empty:
 			} else {
 				text.append("\nFigure ");
 				text.append(figureNo);
 				text.append(": no files uploaded\n");
 			}
-			
 		}
+		
 		
 		//Figure Legends
 		text.append(getWordNo("QID8", "\nFigure Legends: \n"));
