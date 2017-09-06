@@ -54,7 +54,6 @@ public class RunGate {
 
 	public void run(String surveyID, String dsCorpusName, String lastLabreportID) throws GateException, IOException {
 		
-		System.out.println("I'm here");
 		_surveyID = surveyID;
 		_lastLabreportID = lastLabreportID;
 		_dsCorpusName = dsCorpusName;
@@ -80,14 +79,14 @@ public class RunGate {
 		_corpus = Factory.newCorpus("newCorpus");
 		URL qualtrics = null;
 
-		qualtrics = new URL(
-				"https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID="
-						+ _surveyID + "&LastResponseID=" + _lastLabreportID);
-		
-		//use this when using a new survey
 /*		qualtrics = new URL(
 				"https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID="
-						+ _surveyID);*/
+						+ _surveyID + "&LastResponseID=" + _lastLabreportID);*/
+		
+		//use this when using a new survey
+		qualtrics = new URL(
+				"https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID="
+						+ _surveyID);
 		
 		//use this when adding lab reports from local xml file
 		//qualtrics = new File("/home/setarosd/Desktop/missing.xml").toURI().toURL();

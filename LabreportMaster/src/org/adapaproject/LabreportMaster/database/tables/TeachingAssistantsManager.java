@@ -38,8 +38,10 @@ public class TeachingAssistantsManager {
 				TeachingAssistant bean = new TeachingAssistant();
 				bean.set_wfu_email(taEmail);
 				int ta_id = rs.getInt("ta_id");
+				System.out.println("TA: " + ta_id);
 				return ta_id;
 			} else {
+				System.out.println("TA else: ");
 				return (Integer) null;
 			}
 							
