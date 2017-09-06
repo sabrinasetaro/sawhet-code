@@ -241,11 +241,11 @@ public class CreateContentDocument {
 		String[] helpquestions = {"QID29", "QID35", "QID37", "QID42", "QID39", "QID41", "QID44", "QID93", "QID47", "QID51", "title", "abstract", "introduction", "materials and methods", "results", "discussion", "literature cited", "formatting", "tables", "figures", "legends"};
 		ArrayList<String> info = new ArrayList<String>();
 		//loop to get information and print the right info in place
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 10; i++) {
 			if(stringFor(_doc, _original.get(helpquestions[i])).isEmpty()) {
 				//do nothing
 			} else {
-				int topic = i+9;
+				int topic = i+10;
 				info.add(helpquestions[topic]);
 			};
 		}
