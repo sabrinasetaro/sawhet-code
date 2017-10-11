@@ -42,7 +42,8 @@ public class TeachingAssistantsManager {
 				return ta_id;
 			} else {
 				System.out.println("TA else: ");
-				return (Integer) null;
+				//return (Integer) null;
+				return (Integer) 0;
 			}
 							
 		} catch (SQLException e) {
