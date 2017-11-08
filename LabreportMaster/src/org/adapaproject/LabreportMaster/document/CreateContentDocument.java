@@ -118,6 +118,8 @@ public class CreateContentDocument {
 		//add text to worddoc
 		worddoc.addContentWORD("Date submitted: " + stringFor(_doc, _original.get("EndDate")), false);
 		
+		//Author
+		
 		text.append("Author of this lab report is: ");
 		text.append(stringFor(_doc, _original.get("QID16_1_TEXT")));
 		text.append(" ");
@@ -127,6 +129,14 @@ public class CreateContentDocument {
 		//add text to worddoc
 		worddoc.addContentWORD("Author of this lab report is: " + stringFor(_doc, _original.get("QID16_1_TEXT")) + " " + stringFor(_doc, _original.get("QID16_2_TEXT")), false);
 				
+		//ID
+		text.append("ID: ");
+		text.append(_id);
+		text.append("\n");
+		
+		//add text to worddoc
+		worddoc.addContentWORD("ID: " + _id, false);
+		
 		//add course
 		text.append("Course number: ");
 		text.append(_course);
