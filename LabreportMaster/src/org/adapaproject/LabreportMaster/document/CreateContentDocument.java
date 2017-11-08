@@ -96,9 +96,16 @@ public class CreateContentDocument {
 		try {
 			String type = stringFor(_doc, _original.get("QID90"));
 			if (type.equals("submission")) {
-				text.append("This is a lab report.\n");
+				text.append("This is a submission.\n");
+				
+				//add text to worddoc
+				worddoc.addContentWORD("This is a submission.\n", false);
+				
 			} else if (type.equals("revision")) {
 				text.append("This is a revision of a previous lab report.\n");
+				
+				//add text to worddoc
+				worddoc.addContentWORD("This is a revision.\n", false);
 			}
 		} catch (Exception e) {
 			//do nothing
