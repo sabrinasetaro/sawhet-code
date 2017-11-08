@@ -40,8 +40,8 @@ import gate.util.persistence.PersistenceManager;
 public class RunGate {
 	
 	private CorpusController _controller;
-	private static String _home = "/home/setarosd/git";
-	//private static String _home = "/usr/share/sawhet";
+	//private static String _home = "/home/setarosd/git";
+	private static String _home = "/usr/share/sawhet";
 
 	private Corpus _corpus;
 	private Corpus _corpusAll;
@@ -78,18 +78,19 @@ public class RunGate {
 	private void createSmallCorpus() throws ResourceInstantiationException, IOException {
 		_corpus = Factory.newCorpus("newCorpus");
 		URL qualtrics = null;
-
-/*		qualtrics = new URL(
+		
+		//use this when using an existing survey
+		/*qualtrics = new URL(
 				"https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID="
 						+ _surveyID + "&LastResponseID=" + _lastLabreportID);*/
 		
 		//use this when using a new survey
-		qualtrics = new URL(
+/*		qualtrics = new URL(
 				"https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID="
-						+ _surveyID);
+						+ _surveyID);*/
 		
 		//use this when adding lab reports from local xml file
-		//qualtrics = new File("/home/setarosd/Desktop/missing.xml").toURI().toURL();
+		qualtrics = new File("/home/setarosd/Desktop/missing.xml").toURI().toURL();
 		
 		System.out.println("url: " + qualtrics);
 
