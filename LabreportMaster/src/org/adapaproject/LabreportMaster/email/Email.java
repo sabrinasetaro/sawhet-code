@@ -27,7 +27,7 @@ import org.adapaproject.LabreportMaster.document.WriteToFile;
  */
 public class Email {
 	
-	private static String _toTA;
+	private static String _toME;
 	private static String _subject;
 	private static String _textDirectory;
 	private static String _analysisDirectory;
@@ -42,15 +42,13 @@ public class Email {
 		//String studentEmail = CreateContentDocument.get_email();
 		_taName = CreateContentDocument.get_tA();
 
-		//_toTA = "johnsoad@wfu.edu";
-		_toTA = "sabrina.setaro@gmail.com";
+		_toME = "sabrina.setaro@gmail.com";
 		_subject = CreateContentDocument.get_name();
 
 		//this is the directory to the file previously generated
 		_textDirectory = WriteToFile.get_textDirectory();
 		_analysisDirectory = WriteToFile.get_analysisDirectory();
 
-		//this sends out an email to students, with only lab report
 		this.generateEmail();
 		
 	}
@@ -81,7 +79,7 @@ public class Email {
 			Message msg = new MimeMessage(session);
 			msg.setFrom(new InternetAddress("from-email@gmail.com"));
 			msg.addRecipients(Message.RecipientType.TO,
-				InternetAddress.parse(_toTA));
+				InternetAddress.parse(_toME));
 			msg.addRecipients(Message.RecipientType.BCC,
 					InternetAddress.parse(_bcc));
 			msg.setSubject("Lab Report of " + _subject + " (TA: " + _taName + ")");
@@ -112,6 +110,74 @@ public class Email {
 			
 			//set multi-part as email content
 			msg.setContent(multipart);
+			
+			//send message
+			Transport.send(msg);
+
+		} catch (MessagingException e) {
+			throw new RuntimeException(e);
+		}
+	
+	}
+	
+	public void generateErrorMail(String content) throws AddressException, MessagingException, IOException {        
+
+		//set SMTP server properties 
+		final String username = "biolab@wfu.edu";
+		final String token = "axpcptuhubjnqnuh";
+
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.auth.mechanism", "XOAUTH2");
+
+		Session session = Session.getInstance(props,
+		  new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, token);
+			}
+		  });
+
+		try {
+			//set recipients, sender and subject
+			Message msg = new MimeMessage(session);
+			msg.setFrom(new InternetAddress("from-email@gmail.com"));
+			msg.addRecipients(Message.RecipientType.TO,
+				InternetAddress.parse("setarosd@wfu.edu"));
+			//msg.addRecipients(Message.RecipientType.BCC,
+					//InternetAddress.parse(_bcc));
+			msg.setSubject("Sumbission Error");
+			
+			//create message part
+			MimeBodyPart messageBodyPart = new MimeBodyPart();
+			String message = content;
+			messageBodyPart.setContent(message, "text/plain");
+			
+			/*
+			//create multi part
+			Multipart multipart = new MimeMultipart();
+			
+			//add message
+			multipart.addBodyPart(messageBodyPart);
+			
+			//add attachment 1
+			MimeBodyPart attachPart1 = new MimeBodyPart();
+			String attachFile1 = _analysisDirectory;
+			attachPart1.attachFile(attachFile1);
+			multipart.addBodyPart(attachPart1);
+			
+			//add attachment 2
+			MimeBodyPart attachPart2 = new MimeBodyPart();
+			String attachFile2 = _textDirectory + ".docx";
+			attachPart2.attachFile(attachFile2);
+			multipart.addBodyPart(attachPart2);
+		
+			
+			//set multi-part as email content
+			msg.setContent(multipart);
+			*/
 			
 			//send message
 			Transport.send(msg);
