@@ -49,12 +49,12 @@ public class Email {
 		_textDirectory = WriteToFile.get_textDirectory();
 		_analysisDirectory = WriteToFile.get_analysisDirectory();
 
-		this.generateEmail();
+		//this.generateEmail();
 		
 	}
 	
 	
-	private void generateEmail() throws AddressException, MessagingException, IOException {        
+	public void generateEmail() throws AddressException, MessagingException, IOException {        
 
 		//set SMTP server properties 
 		final String username = "biolab@wfu.edu";
