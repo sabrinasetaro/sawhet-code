@@ -48,8 +48,8 @@ public class Main {
 		try {
 			handler = new FileHandler("LabreportLog.xml");
 			log.addHandler(handler);
-			Email logerror = new Email();
-			logerror.generateErrorMail("Failed to create LabreportLog");
+			//Email logerror = new Email();
+			//logerror.generateErrorMail("Failed to create LabreportLog");
 		} catch (Exception e) {
 			log.log(Level.WARNING, "Error creating file", e);
 		}
@@ -147,13 +147,13 @@ public class Main {
 						}
 						
 						//send email
-						try {
+						/*try {
 							Email labreport = new Email();
 							labreport.generateEmail();
 							System.out.println("Email was sent.");
 						} catch (Exception e) {
 							log.log(Level.SEVERE, "Email was not sent for " + id + ".", e);
-						}
+						}*/
 						
 						//added to avoid saving testing data
 /*						String myEmail=null;
