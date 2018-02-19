@@ -263,7 +263,7 @@ public class CreateContentDocument {
 			if(stringFor(_doc, _original.get(helpquestions[i])).isEmpty()) {
 				//do nothing
 			} else {
-				int topic = i+10;
+				int topic = i+9;
 				info.add(helpquestions[topic]);
 			};
 		}
