@@ -218,8 +218,7 @@ public class CreateContentDocument {
 		worddoc.addContentWORD("\n", false);
 		
 		//create array of tables and graphs
-		String[] figureList = {"QID85", "QID84", "QID83", "QID82", "QID89", "QID88", "QID87", "QID86"};
-		//String[] figureList = {"QID85__1", "QID85__2"};
+		String[] figureList = {"QID85__1", "QID85__2", "QID85__3", "QID85__4", "QID85__5", "QID85__6" ,"QID85__7", "QID85__8", "QID85__9", "QID85__10", "QID85__11", "QID85__12", "QID85__13", "QID85__14", "QID85__15", "QID85__16", "QID85__17", "QID85__18" ,"QID85__19", "QID85__20"};
 
 		
 		//loop over figures and print link
