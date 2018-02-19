@@ -33,7 +33,6 @@ public class WriteToFile {
 		
 		String id = CreateContentDocument.get_id();
 		String ta = CreateContentDocument.get_tA();
-		String name = CreateContentDocument.get_name();
 		StringBuffer directory = new StringBuffer();
 		directory.append(RunGate.get_home());
 		directory.append("/gate/outputTAs/");
@@ -45,8 +44,7 @@ public class WriteToFile {
 				switch (typeOfDoc) {
 				case DOCUMENT:
 					directory.append("labreport/");
-					//directory.append(id);
-					directory.append(name);
+					directory.append(id);
 					//need this to attach file from correct directory later
 					directory.append("_text");
 					_textDirectory = directory.toString();
