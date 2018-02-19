@@ -262,15 +262,13 @@ public class CreateContentDocument {
 		for (int i = 0; i < 9; i++) {
 			if(stringFor(_doc, _original.get(helpquestions[i])).isEmpty()) {
 				//do nothing
-				System.out.println("there is some problem here for doing nothing");
 			} else {
 				int topic = i+10;
 				info.add(helpquestions[topic]);
-				System.out.println("this should be rigt");
 			};
 		}
 		//this is just for cosmetics, so that the list has no square brackets around.
-/*		StringBuilder builder = new StringBuilder();
+		StringBuilder builder = new StringBuilder();
 		for (String value : info) {
 		    builder.append(value + ", ");
 		}
@@ -298,7 +296,7 @@ public class CreateContentDocument {
 			worddoc.addContentWORD("Other Information", false);
 			worddoc.addContentWORD(stringFor(_doc, _original.get("QID16_1_TEXT")) + " used the help option for info on how to write: --> " + stringText, false);
 		}
-		text.append("*************************************************************************\n");*/
+		text.append("*************************************************************************\n");
 		
 		//save text file
 		try {
