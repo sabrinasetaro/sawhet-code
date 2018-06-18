@@ -164,7 +164,8 @@ public class Main {
 						//TODO: change back after testing
 						//if (!myEmail.equals("setarosd@wfu.edu")) {
 						//if (myEmail.equals("setarosd@wfu.edu")) {
-							try {
+						//TODO: change back after testing
+/*							try {
 								boolean success = false;
 								WritetoDatabase dbInsert = new WritetoDatabase(doc, datastoreId);
 								try {
@@ -194,7 +195,7 @@ public class Main {
 							} catch (Exception e1) {
 								//System.err.println("Database could not be instantiated.");
 								log.log(Level.SEVERE, "Database could not be instantiated.", e1);
-							} 
+							} */
 /*						} else {
 							//System.out.println("Lab report is from Sabrina Setaro and was not saved in database.");
 							log.log(Level.WARNING, "Lab report is from Sabrina Setaro and was not saved in database for " + id + ".");
