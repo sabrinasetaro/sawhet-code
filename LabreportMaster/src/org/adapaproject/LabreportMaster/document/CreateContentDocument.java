@@ -23,6 +23,7 @@ public class CreateContentDocument {
 	private static Document _doc;
 	private static AnnotationSet _original;
 	private static AnnotationSet _results;
+	private static AnnotationSet _flags;
 	private static String _course;
 	private static String _tA;
 	//needed for database
