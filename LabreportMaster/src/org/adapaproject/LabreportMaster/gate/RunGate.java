@@ -80,14 +80,14 @@ public class RunGate {
 		URL qualtrics = null;
 		
 		//use this when using an existing survey
-		qualtrics = new URL(
-				"https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID="
-						+ _surveyID + "&LastResponseID=" + _lastLabreportID);
-		
-		//use this when using a new survey
 /*		qualtrics = new URL(
 				"https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID="
-						+ _surveyID);*.
+						+ _surveyID + "&LastResponseID=" + _lastLabreportID);*/
+		
+		//use this when using a new survey
+		qualtrics = new URL(
+				"https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID="
+						+ _surveyID);
 		
 		//use this when adding lab reports from local xml file
 /*		qualtrics = new File("/home/setarosd/Desktop/missing.xml").toURI().toURL();
@@ -112,6 +112,7 @@ public class RunGate {
 			}
 		} catch (Exception e) {
 			System.err.println("There was some problem with downloading data from qualtrics. Try again later.");
+			System.out.println(qualtrics);
 		}
 	}
 	
@@ -211,7 +212,8 @@ public class RunGate {
 		//load xgapp file
 		try {
 			_controller = (CorpusController)
-									PersistenceManager.loadObjectFromFile(new File(_home + "/gate/LabReports_caseInsensitive.gapp"));
+									//PersistenceManager.loadObjectFromFile(new File(_home + "/gate/LabReports_caseInsensitive.gapp"));
+									PersistenceManager.loadObjectFromFile(new File(_home + "/gate/LabReports_fall2018.gapp"));
 			
 			System.out.println("Controller loaded.");
 		} catch (PersistenceException | ResourceInstantiationException | IOException e) {
