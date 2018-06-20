@@ -96,10 +96,10 @@ public class Email {
 			multipart.addBodyPart(messageBodyPart);
 			
 			//add attachment 1
-			MimeBodyPart attachPart1 = new MimeBodyPart();
+/*			MimeBodyPart attachPart1 = new MimeBodyPart();
 			String attachFile1 = _analysisDirectory;
 			attachPart1.attachFile(attachFile1);
-			multipart.addBodyPart(attachPart1);
+			multipart.addBodyPart(attachPart1);*/
 			
 			//add attachment 2
 			MimeBodyPart attachPart2 = new MimeBodyPart();
