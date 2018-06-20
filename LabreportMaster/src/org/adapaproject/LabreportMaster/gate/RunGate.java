@@ -20,6 +20,7 @@ import com.sun.org.apache.bcel.internal.util.SyntheticRepository;
 
 import gate.Corpus;
 import gate.CorpusController;
+import gate.creole.ConditionalController;
 import gate.DataStore;
 import gate.Document;
 import gate.Factory;
@@ -212,6 +213,7 @@ public class RunGate {
 		//load xgapp file
 		try {
 			_controller = (CorpusController)
+			//_controller = (gate.creole.ConditionalController)
 									//PersistenceManager.loadObjectFromFile(new File(_home + "/gate/LabReports_caseInsensitive.gapp"));
 									PersistenceManager.loadObjectFromFile(new File(_home + "/gate/LabReports_fall2018.gapp"));
 			
