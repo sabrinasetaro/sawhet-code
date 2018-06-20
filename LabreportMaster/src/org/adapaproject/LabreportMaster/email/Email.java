@@ -86,7 +86,7 @@ public class Email {
 			
 			//create message part
 			MimeBodyPart messageBodyPart = new MimeBodyPart();
-			String message = "Lab report and analyses are attached.\n\nRegards,\nLab Report Submission System\n\nFor Questions, please contact Sabrina Setaro, setarosd@wfu.edu";
+			String message = "Lab report is attached.\n\nRegards,\nLab Report Submission System\n\nFor Questions, please contact Sabrina Setaro, setarosd@wfu.edu";
 			messageBodyPart.setContent(message, "text/plain");
 			
 			//create multi part
