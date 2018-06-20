@@ -277,7 +277,7 @@ public class CreateContentDocument {
 		//clear trailing comma
 		stringText = stringText.replaceAll(", $", "");
 		
-		text.append("\n\n*************************************************************************\n");
+/*		text.append("\n\n*************************************************************************\n");
 		//check if help was asked for
 		if (info.isEmpty()) {
 			text.append("Other Information:\n");
@@ -296,8 +296,22 @@ public class CreateContentDocument {
 		
 			worddoc.addContentWORD("Other Information", false);
 			worddoc.addContentWORD(stringFor(_doc, _original.get("QID16_1_TEXT")) + " used the help option for info on how to write: --> " + stringText, false);
-		}
+		}*/
 		text.append("*************************************************************************\n");
+		
+		//Feedback
+		text.append("\n");
+		text.append("\n");
+		text.append("\nFeedback from SAWHET: ");
+		text.append("\n");
+				
+		worddoc.addContentWORD("\n", false);
+		worddoc.addContentWORD("\n", false);
+		worddoc.addContentWORD("***************************************************************************************************************", true);
+		worddoc.addContentWORD("\n", false);
+		worddoc.addContentWORD("Feedback from SAWHET", true);
+		worddoc.addContentWORD("\n", false);
+		
 		
 		//save text file
 		try {
