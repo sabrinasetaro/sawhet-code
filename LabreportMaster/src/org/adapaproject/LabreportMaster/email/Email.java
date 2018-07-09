@@ -86,7 +86,7 @@ public class Email {
 			
 			//create message part
 			MimeBodyPart messageBodyPart = new MimeBodyPart();
-			String message = "Your lab report is attached.\n\nPlease go through the document and make sure the pictures are not too small or too big./nAlso, check out the feedback part to see how you can improve your submission. In case you want to resubmit, just start a new submission in SAWHET.\n\nRegards,\nLab Report Submission System\n\nFor Questions, please contact Sabrina Setaro, setarosd@wfu.edu";
+			String message = "Your lab report is attached.\n\nPlease go through the document and make sure the figures and tables are not too small or too big.\nAlso, check out the feedback part to see how you can improve your submission. In case you want to resubmit, just start a new submission in SAWHET.\n\nRegards,\nSabrina Setaro\n\nFor questions, please contact me at setarosd@wfu.edu";
 			messageBodyPart.setContent(message, "text/plain");
 			
 			//create multi part

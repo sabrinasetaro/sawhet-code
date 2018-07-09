@@ -7,13 +7,17 @@ import static gate.Utils.stringFor;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
+import gate.Annotation;
 import gate.AnnotationSet;
 import gate.Document;
+import gate.FeatureMap;
 
 /**
  * @author setarosd
@@ -22,8 +26,8 @@ import gate.Document;
 public class CreateContentDocument {
 	private static Document _doc;
 	private static AnnotationSet _original;
-	private static AnnotationSet _results;
-	private static AnnotationSet _flags;
+	@SuppressWarnings("unused")
+	private static AnnotationSet _default;
 	private static String _course;
 	private static String _tA;
 	//needed for database
@@ -33,6 +37,7 @@ public class CreateContentDocument {
 	private static String _name;
 	private static String _date;
 	private static String _number;
+	private ArrayList<String> _sections;
 
 	public CreateContentDocument(Document doc) throws IOException, InvalidFormatException {
 		
@@ -41,7 +46,7 @@ public class CreateContentDocument {
 		
 		_doc = doc;
 		_original = _doc.getAnnotations("Original markups");
-		_results = _doc.getAnnotations();
+		_default = _doc.getAnnotations();
 		_id = stringFor(_doc, _original.get("ResponseID"));
 		try {
 			_course = this.checkCourse();
@@ -57,7 +62,16 @@ public class CreateContentDocument {
 		_name = stringFor(_doc, _original.get("Name"));
 		_date = stringFor(_doc, _original.get("EndDate"));
 		_number = (String) stringFor(_doc, _original.get("QID17"));
-
+		
+		_sections = new ArrayList<String>();
+		_sections.add("Title");
+		_sections.add("Abstract");
+		_sections.add("Intro");
+		_sections.add("MM");
+		_sections.add("Results");
+		_sections.add("Discussion");
+		_sections.add("Literature");
+	
 	}
 	
 	public void getInfoDatabase() {
@@ -311,6 +325,123 @@ public class CreateContentDocument {
 		worddoc.addContentWORD("\n", false);
 		worddoc.addContentWORD("Feedback from SAWHET", true);
 		worddoc.addContentWORD("\n", false);
+		worddoc.addContentWORD("Disclaimer:", false);
+		worddoc.addContentWORD("\n", false);
+		worddoc.addContentWORD(FeedbackText.get_disclaimer(), false);
+		worddoc.addContentWORD("\n", false);
+				
+		//go throuth all annotations
+		for (int i = 0; i < _sections.size(); i++) {
+			String section = _sections.get(i);
+			AnnotationSet annotationSet = _default.get(section);
+			Annotation annotation = annotationSet.iterator().next();  
+			
+			FeatureMap features = annotation.getFeatures();
+			Iterator it = features.entrySet().iterator();
+			
+			while (it.hasNext()) {
+				Entry pair = (Entry) it.next();
+				
+				//iterate through flags and give feedback
+				if (section == "Title" && pair.getKey() == "informal") {
+					worddoc.addContentWORD(section + " contains informal language.", false);
+				} else if (section == "Title" && pair.getKey() == "tooLong") {
+					worddoc.addContentWORD(section + " is too long.", false);
+				} else if (section == "Abstract" && pair.getKey() == "outcomeMiss") {
+					worddoc.addContentWORD(section + " is missing outcomes.", false);
+				} else if (section == "Abstract" && pair.getKey() == "tooShort") {
+					worddoc.addContentWORD(section + " is too short.", false);
+				} else if (section == "Abstract" && pair.getKey() == "citation") {
+					worddoc.addContentWORD(section + " contains citations.", false);
+				} else if (section == "Abstract" && pair.getKey() == "informal") {
+					worddoc.addContentWORD(section + " contains informal language.", false);
+				} else if (section == "Abstract" && pair.getKey() == "naive") {
+					worddoc.addContentWORD(section + " contains naive language.", false);
+				} else if (section == "Abstract" && pair.getKey() == "details") {
+					worddoc.addContentWORD(section + " has too many details from Materials and Methods and/or Results.", false);	
+				} else if (section == "Intro" && pair.getKey() == "tooShort") {
+					worddoc.addContentWORD(section + " is too short.", false);
+				} else if (section == "Intro" && pair.getKey() == "tooLong") {
+					worddoc.addContentWORD(section + " is too long.", false);
+				} else if (section == "Intro" && pair.getKey() == "citation" && pair.getValue() == "no") {
+					worddoc.addContentWORD(section + " has no citations.", false);
+				} else if (section == "Intro" && pair.getKey() == "citation" && pair.getValue() == "wrong") {
+					worddoc.addContentWORD(section + " has incorrect citation format.", false);
+				} else if (section == "Intro" && pair.getKey() == "informal") {
+					worddoc.addContentWORD(section + " contains informal language.", false);
+				} else if (section == "Intro" && pair.getKey() == "noHypothesis") {
+					worddoc.addContentWORD(section + " lacks a hypothesis.", false);
+				} else if (section == "Intro" && pair.getKey() == "weakHypothesis") {
+					worddoc.addContentWORD(section + " has a hypothesis but it is formulated rather weak.", false);
+				} else if (section == "Intro" && pair.getKey() == "quotes") {
+					worddoc.addContentWORD(section + " contains quotes.", false);
+				} else if (section == "Intro" && pair.getKey() == "stats") {
+					worddoc.addContentWORD(section + " contains too many statistical details that should go into Materials and Methods.", false);
+				} else if (section == "Intro" && pair.getKey() == "decimals") {
+					worddoc.addContentWORD(section + " contains detailed numbers that probably should go into Material and Methods.", false);
+				} else if (section == "Intro" && pair.getKey() == "details") {
+					worddoc.addContentWORD(section + " contains details that should go into Materials and Methods.", false);
+				} else if (section == "MM" && pair.getKey() == "recipeStyle") {
+					worddoc.addContentWORD(section + " is written as a recipe rather than as a report on what has been done.", false);
+				} else if (section == "MM" && pair.getKey() == "tooShort") {
+					worddoc.addContentWORD(section + " is too short.", false);
+				} else if (section == "MM" && pair.getKey() == "tooLong") {
+					worddoc.addContentWORD(section + " is too long.", false);
+				} else if (section == "MM" && pair.getKey() == "stats" && pair.getValue() == "no") {
+					worddoc.addContentWORD(section + " has no reference to statistics.", false);
+				} else if (section == "MM" && pair.getKey() == "informal") {
+					worddoc.addContentWORD(section + " contains informal language.", false);
+				} else if (section == "Results" && pair.getKey() == "tooShort") {
+					worddoc.addContentWORD(section + " is too short.", false);
+				} else if (section == "Results" && pair.getKey() == "tooLong") {
+					worddoc.addContentWORD(section + " is too long.", false);
+				} else if (section == "Results" && pair.getKey() == "citations") {
+					worddoc.addContentWORD(section + " has citations.", false);
+				} else if (section == "Results" && pair.getKey() == "informal") {
+					worddoc.addContentWORD(section + " contains informal language.", false);
+				} else if (section == "Results" && pair.getKey() == "hypothesis") {
+					worddoc.addContentWORD(section + " refers to hypothesis.", false);
+				} else if (section == "Results" && pair.getKey() == "interpretation") {
+					worddoc.addContentWORD(section + " contains interpretation.", false);
+				} else if (section == "Results" && pair.getKey() == "stats") {
+					worddoc.addContentWORD(section + " lacks statistical outcome.", false);
+				} else if (section == "Results" && pair.getKey() == "decimals") {
+					worddoc.addContentWORD(section + " lacks specific numbers.", false);
+				} else if (section == "Results" && pair.getKey() == "figReference") {
+					worddoc.addContentWORD(section + " does not refers to figures and tables.", false);
+				} else if (section == "Discussion" && pair.getKey() == "tooShort") {
+					worddoc.addContentWORD(section + " is too short.", false);
+				} else if (section == "Discussion" && pair.getKey() == "tooLong") {
+					worddoc.addContentWORD(section + " is too long.", false);
+				} else if (section == "Discussion" && pair.getKey() == "citation" && pair.getValue() == "no") {
+					worddoc.addContentWORD(section + " has no citations.", false);
+				} else if (section == "Discussion" && pair.getKey() == "citation" && pair.getValue() == "wrong") {
+					worddoc.addContentWORD(section + " has incorrect citation format.", false);
+				} else if (section == "Discussion" && pair.getKey() == "informal") {
+					worddoc.addContentWORD(section + " contains informal language.", false);
+				} else if (section == "Discussion" && pair.getKey() == "noHypothesis") {
+					worddoc.addContentWORD(section + " does not refer to hypothesis.", false);
+				} else if (section == "Discussion" && pair.getKey() == "quotes") {
+					worddoc.addContentWORD(section + " contains quotes.", false);
+				} else if (section == "Discussion" && pair.getKey() == "interpretation" && pair.getValue() == "no") {
+					worddoc.addContentWORD(section + " lacks interpretation.", false);	
+				} else if (section == "Discussion" && pair.getKey() == "stats") {
+					worddoc.addContentWORD(section + " contains too many statistical details.", false);
+				} else if (section == "Discussion" && pair.getKey() == "decimals") {
+					worddoc.addContentWORD(section + " contains detailed numbers that should go into Results.", false);
+				} else if (section == "Discussion" && pair.getKey() == "naive") {
+					worddoc.addContentWORD(section + " contains naive language.", false);
+				} else if (section == "Literature" && pair.getKey() == "literature") {
+					worddoc.addContentWORD(section + " Citations are empty.", false);
+				} else if (section == "Literature" && pair.getKey() == "onlyLabman") {
+					worddoc.addContentWORD(section + " contains only the laboratory manual.", false);
+				} 
+				it.remove();;
+				
+			}
+
+				
+		}
 		
 		
 		//save text file
