@@ -48,6 +48,7 @@ public class CreateContentDocument {
 		_original = _doc.getAnnotations("Original markups");
 		_default = _doc.getAnnotations();
 		_id = stringFor(_doc, _original.get("ResponseID"));
+			
 		try {
 			_course = this.checkCourse();
 		} catch (Exception e) {
