@@ -43,7 +43,7 @@ public class Email {
 		_toStudent = CreateContentDocument.get_email();
 		_taName = CreateContentDocument.get_tA();
 
-		_toME = "sabrina.setaro@gmail.com";
+		//_toME = "sabrina.setaro@gmail.com";
 		_subject = CreateContentDocument.get_name();
 
 		//this is the directory to the file previously generated
@@ -81,8 +81,8 @@ public class Email {
 			msg.setFrom(new InternetAddress("from-email@gmail.com"));
 			msg.addRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(_toStudent));
-			msg.addRecipients(Message.RecipientType.BCC,
-					InternetAddress.parse(_bcc));
+/*			msg.addRecipients(Message.RecipientType.BCC,
+					InternetAddress.parse(_bcc));*/
 			msg.setSubject("Lab Report of " + _subject + " (TA: " + _taName + ")");
 			
 			//create message part
