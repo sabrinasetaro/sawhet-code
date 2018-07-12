@@ -154,18 +154,18 @@ public class Main {
 						}
 						
 						//added to avoid saving testing data
-/*						String myEmail=null;
+						String myEmail=null;
 						try {
 							myEmail = CreateContentDocument.get_email();
 						} catch (Exception e2) {
 							log.log(Level.SEVERE, "Could not get email information for " + id + "." + id + ".", e2);
-						}*/
+						}
 						
 						//TODO: change back after testing
 						//if (!myEmail.equals("setarosd@wfu.edu")) {
-						//if (myEmail.equals("setarosd@wfu.edu")) {
+						if (myEmail.equals("setarosd@wfu.edu")) {
 						//TODO: change back after testing
-/*							try {
+							try {
 								boolean success = false;
 								WritetoDatabase dbInsert = new WritetoDatabase(doc, datastoreId);
 								try {
@@ -195,12 +195,12 @@ public class Main {
 							} catch (Exception e1) {
 								//System.err.println("Database could not be instantiated.");
 								log.log(Level.SEVERE, "Database could not be instantiated.", e1);
-							} */
-/*						} else {
+							} 
+						} else {
 							//System.out.println("Lab report is from Sabrina Setaro and was not saved in database.");
 							log.log(Level.WARNING, "Lab report is from Sabrina Setaro and was not saved in database for " + id + ".");
 
-						}*/
+						}
 						
 						//ssetaro: not saving to mimir right now
 /*						if (!myEmail.equals("setarosd@wfu.edu")) {
