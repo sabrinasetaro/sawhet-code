@@ -28,6 +28,7 @@ import org.adapaproject.LabreportMaster.document.WriteToFile;
 public class Email {
 	
 	private static String _toME;
+	private static String _toStudent;
 	private static String _subject;
 	private static String _textDirectory;
 	private static String _analysisDirectory;
@@ -39,7 +40,7 @@ public class Email {
 	
 	public Email() throws AddressException, MessagingException, IOException {
 		
-		//String studentEmail = CreateContentDocument.get_email();
+		_toStudent = CreateContentDocument.get_email();
 		_taName = CreateContentDocument.get_tA();
 
 		_toME = "sabrina.setaro@gmail.com";
@@ -79,7 +80,7 @@ public class Email {
 			Message msg = new MimeMessage(session);
 			msg.setFrom(new InternetAddress("from-email@gmail.com"));
 			msg.addRecipients(Message.RecipientType.TO,
-				InternetAddress.parse(_toME));
+				InternetAddress.parse(_toStudent));
 			msg.addRecipients(Message.RecipientType.BCC,
 					InternetAddress.parse(_bcc));
 			msg.setSubject("Lab Report of " + _subject + " (TA: " + _taName + ")");
