@@ -59,7 +59,7 @@ public class CreateContentDocument {
 		} catch (Exception e) {
 			log.log(Level.SEVERE, "Error with TA information for " + _id + ".", e);
 		}
-		_email = stringFor(_doc, _original.get("recipientEmail"));
+		_email = stringFor(_doc, _original.get("EmailAddress"));
 		_name = stringFor(_doc, _original.get("Name"));
 		_date = stringFor(_doc, _original.get("EndDate"));
 		_number = (String) stringFor(_doc, _original.get("QID17"));
