@@ -4,7 +4,7 @@ public class FeedbackText {
 	
 	//Disclaimer
 	private static String _disclaimer1 = "This section contains feedback that was automatically created by SAWHET, the lab report submission software of the Biology department.";
-	private static String _disclaimer2 = "Please note that SAWHET can give you useful hints on how to improve your lab report. SAWHET is trained to detect the most common problems found in lab reports. SAWHET is correct in xxx out of xxx times, so we advise you to read through the comments carefully.";
+	private static String _disclaimer2 = "Please note that SAWHET can give you useful hints on how to improve your lab report. SAWHET is trained to detect the most common problems found in lab reports. So we advise you to read through the comments carefully.";
 	private static String _disclaimer3 = "Sometimes, SAWHET makes mistakes and flags something as problematic, when it is not a real problem. In that case, just ignore the comment. Also, please know that SAWHET is only programmed to give you advice for the most problematic errors found in lab reports. These are especially about the organization and format of a scientific paper. All other issues such as flaws and scientific writing problems, will be commented by your TA.";
 	
 	//Title
@@ -41,7 +41,7 @@ public class FeedbackText {
 	
 	//Results
 	private static String _shortResults = "It looks like this section is a bit short. The result section contains the outcome of the study without interpretation and refers to graphs and figures. It is not a repetition of the figure legends and should not just refer to the figures. Please check whether you described the outcome in your results section with enough detail.";
-	private static String _longResults = "It looks like this section is a bit long. This could be an indication that there is information in this section that belongs to either Materials and Methods or to Discussion. The results section should only contain the outcome of the study without interpretation of the results or how the outcome was obtained.";
+	private static String _longResults = "It looks like this section is a bit long. This could be an indication that there is information in this section that belongs to either Materials and Methods or to Discussion. The results section should only contain the outcome of the study without interpretation of the results or how the outcome was obtained. It could also be that your text is a bit repetitive. If so, please revise accordingly.";
 	private static String _colqResults = "This section seems to have some colloquial language, such as ‘my group and I found’ or ‘in this lab’. Please revise and write as you would have actually conducted a scientific experiment to be published in a scientific paper.";
 	private static String _citResults = "SAWHET detected citations in your results section. Citations should not be in this section because Results only states the outcome of the study without interpretation and references to other papers. It should also not contain citations that refer to specific methods that has been used and published elsewhere. Please take these citations and respective information out of the Result section and put them in the adequat sections instead (e.g. Methods or Discussion).";
 	private static String _missStatResults = "It seems like you might miss the outcome of your statistical tests in the Results section. If you have done statistical tests, please state what your effect sizes and p-values were.";
@@ -49,6 +49,23 @@ public class FeedbackText {
 	private static String _missRefResults = "SAWHET could not detect any reference to figures or tables in your Result section. If you do not have graphs or figures that display your results, please think carefully if there is a good reason why not. Normally, all scientific papers have outcomes graphically represented in graphs or figures. If you have figures and graphs, make sure you point to them in your Results section.";
 	private static String _intResults = "It looks like your Result section contains interpretation such as ‘...this could be explained by…’. The goal of Results is to state your outcomes in a meaningful but objective way so that a reader can think about your outcomes independently of what your interpretation is. For example, you can say ‘...our measurements show that caterpillars with treatment X were significantly larger than with treatment Y..’, but do not put this outcome into broader context or find explanation of why that is. Please check your Results section for interpretation and make sure to take all interpretation out and put it into Discussion instead.";
 	private static String _hypResults = "It seems you are referring to your hypothesis in the Results section. We consider this as interpretation, so please check if this is the case and if so, please move the respective statement to Discussion. The goal of Results is to state your outcomes in a meaningful but objective way so that a reader can think about your outcomes independently of what your interpretation is.";
+	
+	//Discussion
+	private static String _shortDiscussion = "Your discussion seems too short. A discussion is the place where you interpret your results and put the outcomes of the study into broader context. Normally, it is much longer than the Result section. A short discussion can be an indicator that you have not interpreted the data in enough detail. Please revise and change accordingly.";
+	private static String _longDiscussion = "Your discussion seems a bit long. A discussion is the place where you interpret your results and put the outcomes of the study into broader context. It normally is quite extensive. However, a very long Discussion could be an indicator that you added content that would rather belong into the results section. Please check and revise accordingly.";
+	private static String _missCitDiscussion = "SAWHET could not detect any citations. The Discussion section is where you compare your results with what others have found, so there need to be citations. You are required to cite at least one primary resource (the lab manual is not a primary resource), but more is normally better because it shows that you are evaluating your results from different angles.";
+	private static String _wrongCitDiscussion = "SAWHET detected some issues with your citation format. The correct citation format is: [FirstAuthor: Year]. If you are citing more than two papers it would be: [FirstAuthor: Year][FirstAuthor: Year]. Please revise accordingly.";
+	private static String _quotesDiscussion = "There seem to be quotes in your Discussion. We do not quote in biology papers but rephrase facts stated by other scientist in our own words and add the citation at the end of the sentence.";
+	private static String _colqDiscussion = "It looks like you have some colloquial language, such as ‘my group and I found’ or ‘in this lab’. Please revise and write as you would actually write a scientific paper. You can use language like ‘we found’ or ‘I found’.";
+	private static String _naiveDiscussion = "It looks like you are using words like ‘correct’, ‘proven’ or ‘wrong’ to describe the outcome or outlook of your experiment. This is problematic, because it implies that experiments can be either correct or wrong and that hypotheses can be proven. All we can do with experiments is to support or reject a hypothesis. Also, data that oppose a hypothesis are not wrong, they just do not support our thinking.";
+	private static String _missHypDiscussion = "It appears you missed referring back to your hypothesis. The Discussion is the place where you interpret your results and state how they relate to your initial hypothesis. Please check if you are indeed missing this and revise accordingly.";
+	private static String _missIntDiscussion = "The Discussion seems to lack interpretation. The Discussion is the place where you interpret your results and put the outcomes of the study into broader context. Please make sure you were not just stating the outcomes, but giving your suggestions on what your results mean and how they relate to other studies.";
+	private static String _detailsDiscussion = "SAWHET found detailed information in your Discussion. This could be an indication that you are putting too much information about your results (e.g. effect sizes or p-values, mM values) in this section. Ideally, these details should be stated in the Results section and only generally referred to in the Discussion. For example, instead of saying ‘the p-value was 0.000345’, you can just write ‘the statistically significant result…’";
+	
+	//Literature Cited
+	private static String _emptyLit = "Make sure you have references in here that point to the literature you cited in your paper.";
+	private static String _onlyLMLit = "It appears you are only citing the lab manual. You are required to have at least one reference to primary literature in your Introduction and Discussion section. The lab manual is not a primary source.";
+	
 	
 	//Getters
 	public static String get_disclaimer1() {
@@ -193,6 +210,54 @@ public class FeedbackText {
 
 	public static String get_hypResults() {
 		return _hypResults;
+	}
+
+	public static String get_shortDiscussion() {
+		return _shortDiscussion;
+	}
+
+	public static String get_longDiscussion() {
+		return _longDiscussion;
+	}
+
+	public static String get_missCitDiscussion() {
+		return _missCitDiscussion;
+	}
+
+	public static String get_wrongCitDiscussion() {
+		return _wrongCitDiscussion;
+	}
+
+	public static String get_quotesDiscussion() {
+		return _quotesDiscussion;
+	}
+
+	public static String get_colqDiscussion() {
+		return _colqDiscussion;
+	}
+
+	public static String get_naiveDiscussion() {
+		return _naiveDiscussion;
+	}
+
+	public static String get_missHypDiscussion() {
+		return _missHypDiscussion;
+	}
+
+	public static String get_missIntDiscussion() {
+		return _missIntDiscussion;
+	}
+
+	public static String get_detailsDiscussion() {
+		return _detailsDiscussion;
+	}
+
+	public static String get_emptyLit() {
+		return _emptyLit;
+	}
+
+	public static String get_onlyLMLit() {
+		return _onlyLMLit;
 	}
 	
 }
