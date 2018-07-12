@@ -33,7 +33,7 @@ public class Email {
 	private static String _textDirectory;
 	private static String _analysisDirectory;
 	private static String _taName;
-	private static String _bcc = "setarosd@wfu.edu";
+	private static String _bcc = _toME;
 	static Properties mailServerProperties;
 	static Session getMailSession;
 	static MimeMessage generateMailMessage;
