@@ -33,7 +33,6 @@ public class Email {
 	private static String _textDirectory;
 	private static String _analysisDirectory;
 	private static String _taName;
-	private static String _bcc = _toME;
 	static Properties mailServerProperties;
 	static Session getMailSession;
 	static MimeMessage generateMailMessage;
@@ -43,7 +42,7 @@ public class Email {
 		_toStudent = CreateContentDocument.get_email();
 		_taName = CreateContentDocument.get_tA();
 
-		//_toME = "sabrina.setaro@gmail.com";
+		_toME = "sabrina.setaro@gmail.com";
 		_subject = CreateContentDocument.get_name();
 
 		//this is the directory to the file previously generated
@@ -79,10 +78,10 @@ public class Email {
 			//set recipients, sender and subject
 			Message msg = new MimeMessage(session);
 			msg.setFrom(new InternetAddress("from-email@gmail.com"));
-			msg.addRecipients(Message.RecipientType.TO,
+			msg.addRecipients(Message.RecipientType.CC,
 				InternetAddress.parse(_toStudent));
-/*			msg.addRecipients(Message.RecipientType.BCC,
-					InternetAddress.parse(_bcc));*/
+			msg.addRecipients(Message.RecipientType.CC,
+					InternetAddress.parse(_toME));
 			msg.setSubject("Lab Report of " + _subject + " (TA: " + _taName + ")");
 			
 			//create message part
