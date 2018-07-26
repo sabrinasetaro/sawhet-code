@@ -161,9 +161,8 @@ public class Main {
 							log.log(Level.SEVERE, "Could not get email information for " + id + "." + id + ".", e2);
 						}
 						
-						//TODO: change back after testing
-						//if (!myEmail.equals("setarosd@wfu.edu")) {
-						if (myEmail.equals("setarosd@wfu.edu")) {
+
+						if (myEmail.equals("....")) {
 						//TODO: change back after testing
 							try {
 								boolean success = false;
@@ -202,19 +201,6 @@ public class Main {
 
 						}
 						
-						//ssetaro: not saving to mimir right now
-/*						if (!myEmail.equals("setarosd@wfu.edu")) {
-							//add to Mimir
-							try {
-								gate.addtoMimir(doc, CreateContentDocument.get_id());
-								System.out.println("Would like to save to mimir if I may.");
-							} catch (Exception e) {
-								//System.err.println("Saving to mimir failed.");
-								log.log(Level.WARNING, "Saving to mimir failed.", e);
-							} 
-						} else {
-							System.out.println("Lab report is from Sabrina Setaro and was not saved to Mimir for " + id + ".");
-						}*/
 											
 					}
 					
