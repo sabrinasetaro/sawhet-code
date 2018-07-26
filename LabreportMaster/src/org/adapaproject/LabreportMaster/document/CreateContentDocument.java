@@ -292,26 +292,7 @@ public class CreateContentDocument {
 		//clear trailing comma
 		stringText = stringText.replaceAll(", $", "");
 		
-/*		text.append("\n\n*************************************************************************\n");
-		//check if help was asked for
-		if (info.isEmpty()) {
-			text.append("Other Information:\n");
-			text.append(stringFor(_doc, _original.get("QID16_1_TEXT")));
-			text.append(" did not use help options.\n");
-			
-			worddoc.addContentWORD("Other Information", false);
-			worddoc.addContentWORD(stringFor(_doc, _original.get("QID16_1_TEXT")) + " did not use help options.", false);
-			
-		} else {
-			text.append("Other Information:\n");
-			text.append(stringFor(_doc, _original.get("QID16_1_TEXT")));
-			text.append(" used the help option for info on how to write:\n--> ");
-			text.append(stringText);
-			text.append("\n");
-		
-			worddoc.addContentWORD("Other Information", false);
-			worddoc.addContentWORD(stringFor(_doc, _original.get("QID16_1_TEXT")) + " used the help option for info on how to write: --> " + stringText, false);
-		}*/
+
 		text.append("*************************************************************************\n");
 		
 		//Feedback
