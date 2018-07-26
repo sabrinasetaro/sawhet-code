@@ -31,7 +31,6 @@ public class Email {
 	private static String _toStudent;
 	private static String _subject;
 	private static String _textDirectory;
-	private static String _analysisDirectory;
 	private static String _taName;
 	static Properties mailServerProperties;
 	static Session getMailSession;
@@ -47,7 +46,6 @@ public class Email {
 
 		//this is the directory to the file previously generated
 		_textDirectory = WriteToFile.get_textDirectory();
-		_analysisDirectory = WriteToFile.get_analysisDirectory();
 
 		//this.generateEmail();
 		
@@ -57,13 +55,13 @@ public class Email {
 	public void generateEmail() throws AddressException, MessagingException, IOException {        
 
 		//set SMTP server properties 
-		final String username = "biolab@wfu.edu";
-		final String token = "axpcptuhubjnqnuh";
+		final String username = "...";
+		final String token = "...";
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.host", "...");
 		props.put("mail.smtp.port", "587");
 		props.put("mail.smtp.auth.mechanism", "XOAUTH2");
 
@@ -77,7 +75,7 @@ public class Email {
 		try {
 			//set recipients, sender and subject
 			Message msg = new MimeMessage(session);
-			msg.setFrom(new InternetAddress("from-email@gmail.com"));
+			msg.setFrom(new InternetAddress("..."));
 			msg.addRecipients(Message.RecipientType.CC,
 				InternetAddress.parse(_toStudent));
 			msg.addRecipients(Message.RecipientType.CC,
@@ -96,12 +94,6 @@ public class Email {
 			multipart.addBodyPart(messageBodyPart);
 			
 			//add attachment 1
-/*			MimeBodyPart attachPart1 = new MimeBodyPart();
-			String attachFile1 = _analysisDirectory;
-			attachPart1.attachFile(attachFile1);
-			multipart.addBodyPart(attachPart1);*/
-			
-			//add attachment 2
 			MimeBodyPart attachPart2 = new MimeBodyPart();
 			String attachFile2 = _textDirectory + ".docx";
 			attachPart2.attachFile(attachFile2);
@@ -123,13 +115,13 @@ public class Email {
 	public void generateErrorMail(String content) throws AddressException, MessagingException, IOException {        
 
 		//set SMTP server properties 
-		final String username = "biolab@wfu.edu";
-		final String token = "axpcptuhubjnqnuh";
+		final String username = "...";
+		final String token = "...";
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.host", "...");
 		props.put("mail.smtp.port", "587");
 		props.put("mail.smtp.auth.mechanism", "XOAUTH2");
 
@@ -143,9 +135,9 @@ public class Email {
 		try {
 			//set recipients, sender and subject
 			Message msg = new MimeMessage(session);
-			msg.setFrom(new InternetAddress("from-email@gmail.com"));
+			msg.setFrom(new InternetAddress("..."));
 			msg.addRecipients(Message.RecipientType.TO,
-				InternetAddress.parse("setarosd@wfu.edu"));
+				InternetAddress.parse("..."));
 			//msg.addRecipients(Message.RecipientType.BCC,
 					//InternetAddress.parse(_bcc));
 			msg.setSubject("Sumbission Error");
@@ -154,30 +146,6 @@ public class Email {
 			MimeBodyPart messageBodyPart = new MimeBodyPart();
 			String message = content;
 			messageBodyPart.setContent(message, "text/plain");
-			
-			/*
-			//create multi part
-			Multipart multipart = new MimeMultipart();
-			
-			//add message
-			multipart.addBodyPart(messageBodyPart);
-			
-			//add attachment 1
-			MimeBodyPart attachPart1 = new MimeBodyPart();
-			String attachFile1 = _analysisDirectory;
-			attachPart1.attachFile(attachFile1);
-			multipart.addBodyPart(attachPart1);
-			
-			//add attachment 2
-			MimeBodyPart attachPart2 = new MimeBodyPart();
-			String attachFile2 = _textDirectory + ".docx";
-			attachPart2.attachFile(attachFile2);
-			multipart.addBodyPart(attachPart2);
-		
-			
-			//set multi-part as email content
-			msg.setContent(multipart);
-			*/
 			
 			//send message
 			Transport.send(msg);
