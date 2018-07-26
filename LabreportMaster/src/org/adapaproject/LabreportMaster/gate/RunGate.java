@@ -41,8 +41,7 @@ import gate.util.persistence.PersistenceManager;
 public class RunGate {
 	
 	private CorpusController _controller;
-	//private static String _home = "/home/setarosd/git";
-	private static String _home = "/usr/share/sawhet";
+	private static String _home = "...";
 
 	private Corpus _corpus;
 	private Corpus _corpusAll;
@@ -80,28 +79,10 @@ public class RunGate {
 		_corpus = Factory.newCorpus("newCorpus");
 		URL qualtrics = null;
 		
-		//use this when using an existing survey
 		qualtrics = new URL(
-				"https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID="
+				"https://...&SurveyID="
 						+ _surveyID + "&LastResponseID=" + _lastLabreportID);
 		
-		//use this when using a new survey
-/*		qualtrics = new URL(
-				"https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID="
-						+ _surveyID);*/
-		
-		//use this when adding lab reports from local xml file
-/*		qualtrics = new File("/home/setarosd/Desktop/missing.xml").toURI().toURL();
-		
-		System.out.println("url: " + qualtrics);*/
-
-		//check for 400 error to see if lastId is present or not
-/*		if(checkfor400Error(qualtrics) == true) {
-			System.err.println("Change to other url to download all data in survey.");
-			qualtrics = new URL(
-					"https://wakeforest.qualtrics.com/WRAPI/ControlPanel/api.php?Request=getLegacyResponseData&Token=UPjscdFr4VsGKElNEfeJSKRdXsey9fRlr1WDYy9P&Version=2.5&User=setarosd%23wakeforest&Format=XML&Labels=1&ExportTags=1&SurveyID="
-							+ _surveyID);
-		}*/
 		
 		//populate corpus
 		try {
@@ -145,7 +126,7 @@ public class RunGate {
 	}
 	
 	private void createCorpusAll() throws PersistenceException, ResourceInstantiationException {
-		_ds2 = this.getDatastore("file:" + _home + "/gate/datastoreLabreports");
+		_ds2 = this.getDatastore("file:" + _home + "/...");
 
 		_corpusAll = Factory.newCorpus("corpusAll");
 		
@@ -162,7 +143,7 @@ public class RunGate {
 				String email = gate.Utils.stringFor(doc, doc.getAnnotations("Original markups").get("EmailAddress"));
 				String course = gate.Utils.stringFor(doc, doc.getAnnotations("Original markups").get("Course1"));
 				//Suppress test lab reports
-				if (email.equals("setarosd@wfu.edu")) {
+				if (email.equals("...")) {
 					//do nothing
 				} else if (course.equals("101")) {
 					//do nothing
@@ -213,9 +194,7 @@ public class RunGate {
 		//load xgapp file
 		try {
 			_controller = (CorpusController)
-			//_controller = (gate.creole.ConditionalController)
-									//PersistenceManager.loadObjectFromFile(new File(_home + "/gate/LabReports_caseInsensitive.gapp"));
-									PersistenceManager.loadObjectFromFile(new File(_home + "/gate/LabReports_fall2018.gapp"));
+									PersistenceManager.loadObjectFromFile(new File(_home + "/gate/..."));
 			
 			System.out.println("Controller loaded.");
 		} catch (PersistenceException | ResourceInstantiationException | IOException e) {
@@ -262,20 +241,7 @@ public class RunGate {
 		Factory.deleteResource(dsCorpus);
 		
 	}
-	
-	public void addtoMimir(Document doc, String labreportID) throws MalformedURLException, IOException, InterruptedException {
-		MimirConnector index = null;
-		try {
-			index = new MimirConnector(
-					new URL("http://biolabs.wfu.edu/mimir-cloud-5.2/454a9100-199e-4a09-b758-fa4c72f7683c"),
-					new WebUtils("manager", "addPilz343$"));
-			index.sendToMimir(doc, labreportID);
-			System.out.println("Document added to Mimir (http://biolabs.wfu.edu/mimir-cloud-5.2/454a9100-199e-4a09-b758-fa4c72f7683c).");
-		} finally {
-			index.close();
-		}
-		
-	}
+
 	
 	public Corpus get_corpus() {
 		return _corpus;
